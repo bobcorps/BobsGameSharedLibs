@@ -247,22 +247,22 @@ public class EntityData extends AssetData
 //	}
 
 
-	//===============================================================================================
-	public static EntityData fromBase64ZippedJSON(String b64)
-	{//===============================================================================================
-
-		String decode64 = Utils.decodeBase64String(b64);
-		String json = Utils.unzipString(decode64);
-
-
-		//Gson gson = new Gson();
-		//EntityData data = gson.fromJson(unzip,EntityData.class);
-
-
-		return fromJSON(json);
-	}
-
-
+//	//===============================================================================================
+//	public static EntityData fromBase64ZippedJSON(String b64)
+//	{//===============================================================================================
+//
+//		String decode64 = Utils.decodeBase64String(b64);
+//		String json = Utils.unzipString(decode64);
+//
+//
+//		//Gson gson = new Gson();
+//		//EntityData data = gson.fromJson(unzip,EntityData.class);
+//
+//
+//		return fromJSON(json);
+//	}
+//
+//
 
 	//===============================================================================================
 	public static EntityData fromJSON(String json)
@@ -424,196 +424,226 @@ public class EntityData extends AssetData
 	}
 
 
-	//===============================================================================================
-	public static EntityData fromString(String text)
-	{//===============================================================================================
-
-		EntityData data = new EntityData();
-
-		String t = new String(text);
 
 
-		t = t.substring(t.indexOf("name:`")+1);
-		data.name = t.substring(0,t.indexOf("`"));
-		t = t.substring(t.indexOf("`,")+1);
-
-		t = t.substring(t.indexOf("id:`")+1);
-		data.id = Integer.parseInt(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+	public String initFromString(String t)
+	{
+		t = super.initFromString(t);
 
 
 
 		t = t.substring(t.indexOf("spriteName:`")+1);
-		data.spriteName = t.substring(0,t.indexOf("`"));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		spriteName = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("spawnXPixels1X:`")+1);
-		data.spawnXPixels1X = Float.parseFloat(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		spawnXPixels1X = Float.parseFloat(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("spawnYPixels1X:`")+1);
-		data.spawnYPixels1X = Float.parseFloat(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		spawnYPixels1X = Float.parseFloat(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("initialFrame:`")+1);
-		data.initialFrame = Integer.parseInt(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		initialFrame = Integer.parseInt(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("pushable:`")+1);
-		data.pushable = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		pushable = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("nonWalkable:`")+1);
-		data.nonWalkable = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		nonWalkable = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("toAlpha:`")+1);
-		data.toAlpha = Float.parseFloat(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		toAlpha = Float.parseFloat(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("scale:`")+1);
-		data.scale = Float.parseFloat(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		scale = Float.parseFloat(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("disableShadow:`")+1);
-		data.disableShadow = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		disableShadow = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("aboveTopLayer:`")+1);
-		data.aboveTopLayer = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		aboveTopLayer = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("layer:`")+1);
-		data.layer = Integer.parseInt(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		layer = Integer.parseInt(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("renderOrder:`")+1);
-		data.renderOrder = RenderOrder.valueOf(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		renderOrder = RenderOrder.valueOf(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("aboveWhenEqual:`")+1);
-		data.aboveWhenEqual = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		aboveWhenEqual = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("alwaysOnBottom:`")+1);
-		data.alwaysOnBottom = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		alwaysOnBottom = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("alwaysOnTop:`")+1);
-		data.alwaysOnTop = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		alwaysOnTop = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("animateThroughFrames:`")+1);
-		data.animateThroughFrames = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		animateThroughFrames = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("ticksBetweenFrames:`")+1);
-		data.ticksBetweenFrames = Integer.parseInt(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		ticksBetweenFrames = Integer.parseInt(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("randomUpToTicksBetweenFrames:`")+1);
-		data.randomUpToTicksBetweenFrames = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		randomUpToTicksBetweenFrames = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("randomFrames:`")+1);
-		data.randomFrames = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		randomFrames = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("ticksBetweenAnimation:`")+1);
-		data.ticksBetweenAnimation = Integer.parseInt(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		ticksBetweenAnimation = Integer.parseInt(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("randomTimeBetweenAnimation:`")+1);
-		data.randomTimeBetweenAnimation = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		randomTimeBetweenAnimation = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("walkSpeed:`")+1);
-		data.walkSpeed = Integer.parseInt(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		walkSpeed = Integer.parseInt(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("ticksPerPixelMoved:`")+1);
-		data.ticksPerPixelMoved = Float.parseFloat(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		ticksPerPixelMoved = Float.parseFloat(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("eventID:`")+1);
-		data.eventID = Integer.parseInt(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		eventID = Integer.parseInt(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("onlyHereDuringEvent:`")+1);
-		data.onlyHereDuringEvent = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		onlyHereDuringEvent = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("mapID:`")+1);
-		data.mapID = Integer.parseInt(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		mapID = Integer.parseInt(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("stateID:`")+1);
-		data.stateID = Integer.parseInt(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		stateID = Integer.parseInt(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("animateThroughCurrentAnimation:`")+1);
-		data.animateThroughCurrentAnimation = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		animateThroughCurrentAnimation = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("loopAnimation:`")+1);
-		data.loopAnimation = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		loopAnimation = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("voicePitch:`")+1);
-		data.voicePitch = Float.parseFloat(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		voicePitch = Float.parseFloat(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("animationDisabled:`")+1);
-		data.animationDisabled = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		animationDisabled = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("hitLayerDisabled:`")+1);
-		data.hitLayerDisabled = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		hitLayerDisabled = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("ignoreHitPlayer:`")+1);
-		data.ignoreHitPlayer = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		ignoreHitPlayer = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("ignoreHitEntities:`")+1);
-		data.ignoreHitEntities = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		ignoreHitEntities = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("dontUsePathfinding:`")+1);
-		data.dontUsePathfinding = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		dontUsePathfinding = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("pullPlayer:`")+1);
-		data.pullPlayer = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		pullPlayer = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("pushPlayer:`")+1);
-		data.pushPlayer = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		pushPlayer = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+2);
 
-		while(t.indexOf("behaviorList:`")!=-1)
+		while(t.startsWith("behaviorList:`"))
 		{
 			t = t.substring(t.indexOf("behaviorList:`")+1);
-			data.behaviorList.add(t.substring(0,t.indexOf("`")));
-			t = t.substring(t.indexOf("`,")+1);
+			t = t.substring(t.indexOf("`")+1);
+		behaviorList.add(t.substring(0,t.indexOf("`")));
+			t = t.substring(t.indexOf("`,")+2);
 		}
 
-		while(t.indexOf("connectionTYPEIDList:`")!=-1)
+		while(t.startsWith("connectionTYPEIDList:`"))
 		{
 			t = t.substring(t.indexOf("connectionTYPEIDList:`")+1);
-			data.connectionTYPEIDList.add(t.substring(0,t.indexOf("`")));
-			t = t.substring(t.indexOf("`,")+1);
+			t = t.substring(t.indexOf("`")+1);
+		connectionTYPEIDList.add(t.substring(0,t.indexOf("`")));
+			t = t.substring(t.indexOf("`,")+2);
 		}
 
 		t = t.substring(t.indexOf("comment:`")+1);
-		data.comment = t.substring(0,t.indexOf("`"));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		comment = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("isNPC:`")+1);
-		data.isNPC = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		isNPC = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+2);
 
-		return data;
+		return t;
 
 
 	}

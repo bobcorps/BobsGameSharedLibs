@@ -113,6 +113,23 @@ public class AssetData
 
 
 
+public String initFromString(String t)
+{
+
+	t = t.substring(t.indexOf("name:`")+1);
+	t = t.substring(t.indexOf("`")+1);
+	name = t.substring(0,t.indexOf("`"));
+	t = t.substring(t.indexOf("`,")+2);
+
+	t = t.substring(t.indexOf("id:`")+1);
+	t = t.substring(t.indexOf("`")+1);
+	id = Integer.parseInt(t.substring(0,t.indexOf("`")));
+	t = t.substring(t.indexOf("`,")+2);
+
+	return t;
+}
+
+
 
 //
 //

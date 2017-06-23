@@ -59,21 +59,21 @@ public class SoundData extends AssetData
 	}
 
 
-
-	//===============================================================================================
-	public static SoundData fromBase64ZippedJSON(String b64)
-	{//===============================================================================================
-
-		String decode64 = Utils.decodeBase64String(b64);
-		String json = Utils.unzipString(decode64);
-
-		//Gson gson = new Gson();
-		//SoundData data = gson.fromJson(json,SoundData.class);
-
-
-		return fromJSON(json);
-	}
-
+//
+//	//===============================================================================================
+//	public static SoundData fromBase64ZippedJSON(String b64)
+//	{//===============================================================================================
+//
+//		String decode64 = Utils.decodeBase64String(b64);
+//		String json = Utils.unzipString(decode64);
+//
+//		//Gson gson = new Gson();
+//		//SoundData data = gson.fromJson(json,SoundData.class);
+//
+//
+//		return fromJSON(json);
+//	}
+//
 
 	//===============================================================================================
 	public static SoundData fromJSON(String json)
@@ -132,40 +132,33 @@ public class SoundData extends AssetData
 	}
 
 
-	//===============================================================================================
-	public static SoundData fromString(String text)
-	{//===============================================================================================
-
-		SoundData data = new SoundData();
-
-		String t = new String(text);
 
 
-		t = t.substring(t.indexOf("name:`")+1);
-		data.name = t.substring(0,t.indexOf("`"));
-		t = t.substring(t.indexOf("`,")+1);
+	public String initFromString(String t)
+	{
+		t = super.initFromString(t);
 
-		t = t.substring(t.indexOf("id:`")+1);
-		data.id = Integer.parseInt(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
 
 		t = t.substring(t.indexOf("fileName:`")+1);
-		data.fileName = t.substring(0,t.indexOf("`"));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		fileName = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("fullFilePath:`")+1);
-		data.fullFilePath = t.substring(0,t.indexOf("`"));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		fullFilePath = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("md5Name:`")+1);
-		data.md5Name = t.substring(0,t.indexOf("`"));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		md5Name = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+2);
 
 
 
 
 
-		return data;
+		return t;
 
 
 	}

@@ -155,25 +155,25 @@ public class SpriteData extends AssetData
 
 
 
-
-	//===============================================================================================
-	public static SpriteData fromBase64ZippedJSON(String b64)
-	{//===============================================================================================
-
-
-
-
-
-		String decode64 = Utils.decodeBase64String(b64);
-		String json = Utils.unzipString(decode64);
-
-		//Gson gson = new Gson();
-		//SpriteData data = gson.fromJson(json,SpriteData.class);
-
-		return fromJSON(json);
-
-
-	}
+//
+//	//===============================================================================================
+//	public static SpriteData fromBase64ZippedJSON(String b64)
+//	{//===============================================================================================
+//
+//
+//
+//
+//
+//		String decode64 = Utils.decodeBase64String(b64);
+//		String json = Utils.unzipString(decode64);
+//
+//		//Gson gson = new Gson();
+//		//SpriteData data = gson.fromJson(json,SpriteData.class);
+//
+//		return fromJSON(json);
+//
+//
+//	}
 
 	//===============================================================================================
 	public static SpriteData fromJSON(String json)
@@ -266,131 +266,147 @@ public class SpriteData extends AssetData
 	}
 
 
-	//===============================================================================================
-	public static SpriteData fromString(String text)
-	{//===============================================================================================
-
-		SpriteData data = new SpriteData();
-
-		String t = new String(text);
 
 
-		t = t.substring(t.indexOf("name:`")+1);
-		data.name = t.substring(0,t.indexOf("`"));
-		t = t.substring(t.indexOf("`,")+1);
+	public String initFromString(String t)
+	{
+		t = super.initFromString(t);
 
-		t = t.substring(t.indexOf("id:`")+1);
-		data.id = Integer.parseInt(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
 
 
 		t = t.substring(t.indexOf("comment:`")+1);
-		data.comment = t.substring(0,t.indexOf("`"));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		comment = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("displayName:`")+1);
-		data.displayName = t.substring(0,t.indexOf("`"));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		displayName = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("widthPixels1X:`")+1);
-		data.widthPixels1X = Integer.parseInt(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		widthPixels1X = Integer.parseInt(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("heightPixels1X:`")+1);
-		data.heightPixels1X = Integer.parseInt(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		heightPixels1X = Integer.parseInt(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("frames:`")+1);
-		data.frames = Integer.parseInt(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		frames = Integer.parseInt(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("isNPC:`")+1);
-		data.isNPC = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		isNPC = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("isKid:`")+1);
-		data.isKid = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		isKid = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("isAdult:`")+1);
-		data.isAdult = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		isAdult = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("isMale:`")+1);
-		data.isMale = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		isMale = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("isFemale:`")+1);
-		data.isFemale = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		isFemale = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("isCar:`")+1);
-		data.isCar = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		isCar = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("isAnimal:`")+1);
-		data.isAnimal = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		isAnimal = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("hasShadow:`")+1);
-		data.hasShadow = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		hasShadow = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("isRandom:`")+1);
-		data.isRandom = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		isRandom = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("isDoor:`")+1);
-		data.isDoor = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		isDoor = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("isGame:`")+1);
-		data.isGame = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		isGame = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("isItem:`")+1);
-		data.isItem = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		isItem = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("forceHQ2X:`")+1);
-		data.forceHQ2X = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		forceHQ2X = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("forceMD5Export:`")+1);
-		data.forceMD5Export = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		forceMD5Export = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("eventID:`")+1);
-		data.eventID = Integer.parseInt(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		eventID = Integer.parseInt(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("itemGameDescription:`")+1);
-		data.itemGameDescription = t.substring(0,t.indexOf("`"));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		itemGameDescription = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("gamePrice:`")+1);
-		data.gamePrice = Float.parseFloat(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		gamePrice = Float.parseFloat(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("utilityOffsetXPixels1X:`")+1);
-		data.utilityOffsetXPixels1X = Integer.parseInt(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		utilityOffsetXPixels1X = Integer.parseInt(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("utilityOffsetYPixels1X:`")+1);
-		data.utilityOffsetYPixels1X = Integer.parseInt(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		utilityOffsetYPixels1X = Integer.parseInt(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("dataMD5:`")+1);
-		data.dataMD5 = t.substring(0,t.indexOf("`"));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		dataMD5 = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("paletteMD5:`")+1);
-		data.paletteMD5 = t.substring(0,t.indexOf("`"));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		paletteMD5 = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+2);
 
 
 
-		while(t.indexOf("animationList:")!=-1)
+		while(t.startsWith("animationList:"))
 		{
 			String frameSequenceName = "";
 			int frameStart = 0;
@@ -400,34 +416,40 @@ public class SpriteData extends AssetData
 			int hitBoxFromBottomPixels1X = 0;
 
 			t = t.substring(t.indexOf("frameSequenceName:`")+1);
+			t = t.substring(t.indexOf("`")+1);
 			frameSequenceName = t.substring(0,t.indexOf("`"));
-			t = t.substring(t.indexOf("`,")+1);
+			t = t.substring(t.indexOf("`,")+2);
 
 			t = t.substring(t.indexOf("frameStart:`")+1);
+			t = t.substring(t.indexOf("`")+1);
 			frameStart = Integer.parseInt(t.substring(0,t.indexOf("`")));
-			t = t.substring(t.indexOf("`,")+1);
+			t = t.substring(t.indexOf("`,")+2);
 
 			t = t.substring(t.indexOf("hitBoxFromLeftPixels1X:`")+1);
+			t = t.substring(t.indexOf("`")+1);
 			hitBoxFromLeftPixels1X = Integer.parseInt(t.substring(0,t.indexOf("`")));
-			t = t.substring(t.indexOf("`,")+1);
+			t = t.substring(t.indexOf("`,")+2);
 
 			t = t.substring(t.indexOf("hitBoxFromRightPixels1X:`")+1);
+			t = t.substring(t.indexOf("`")+1);
 			hitBoxFromRightPixels1X = Integer.parseInt(t.substring(0,t.indexOf("`")));
-			t = t.substring(t.indexOf("`,")+1);
+			t = t.substring(t.indexOf("`,")+2);
 
 			t = t.substring(t.indexOf("hitBoxFromTopPixels1X:`")+1);
+			t = t.substring(t.indexOf("`")+1);
 			hitBoxFromTopPixels1X = Integer.parseInt(t.substring(0,t.indexOf("`")));
-			t = t.substring(t.indexOf("`,")+1);
+			t = t.substring(t.indexOf("`,")+2);
 
 			t = t.substring(t.indexOf("hitBoxFromBottomPixels1X:`")+1);
+			t = t.substring(t.indexOf("`")+1);
 			hitBoxFromBottomPixels1X = Integer.parseInt(t.substring(0,t.indexOf("`")));
-			t = t.substring(t.indexOf("`,")+1);
+			t = t.substring(t.indexOf("`,")+2);
 
 			SpriteAnimationSequence s = new SpriteAnimationSequence(frameSequenceName, frameStart, hitBoxFromLeftPixels1X, hitBoxFromRightPixels1X, hitBoxFromTopPixels1X, hitBoxFromBottomPixels1X);
-			data.animationList.add(s);
+			animationList.add(s);
 		}
 
-		return data;
+		return t;
 
 
 	}

@@ -102,26 +102,26 @@ public class DialogueData extends AssetData
 	}
 
 
-
-	//===============================================================================================
-	public static DialogueData fromBase64ZippedJSON(String b64)
-	{//===============================================================================================
-
-
-		String decode64 = Utils.decodeBase64String(b64);
-		String json = Utils.unzipString(decode64);
-
-		//Gson gson = new Gson();
-		//DialogueData data = gson.fromJson(json,DialogueData.class);
-
-		return fromJSON(json);
-
-
-
-	}
-
-
-
+//
+//	//===============================================================================================
+//	public static DialogueData fromBase64ZippedJSON(String b64)
+//	{//===============================================================================================
+//
+//
+//		String decode64 = Utils.decodeBase64String(b64);
+//		String json = Utils.unzipString(decode64);
+//
+//		//Gson gson = new Gson();
+//		//DialogueData data = gson.fromJson(json,DialogueData.class);
+//
+//		return fromJSON(json);
+//
+//
+//
+//	}
+//
+//
+//
 	//===============================================================================================
 	public static DialogueData fromJSON(String json)
 	{//===============================================================================================
@@ -153,8 +153,8 @@ public class DialogueData extends AssetData
 
 
 	}
-
-
+//
+//
 
 
 	//===============================================================================================
@@ -195,37 +195,29 @@ public class DialogueData extends AssetData
 	}
 
 
-	//===============================================================================================
-	public static DialogueData fromString(String text)
-	{//===============================================================================================
 
-		DialogueData data = new DialogueData();
+	public String initFromString(String t)
+	{
+		t = super.initFromString(t);
 
-		String t = new String(text);
-
-
-		t = t.substring(t.indexOf("name:`")+1);
-		data.name = t.substring(0,t.indexOf("`"));
-		t = t.substring(t.indexOf("`,")+1);
-
-		t = t.substring(t.indexOf("id:`")+1);
-		data.id = Integer.parseInt(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
 
 		t = t.substring(t.indexOf("caption:`")+1);
-		data.caption = t.substring(0,t.indexOf("`"));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		caption = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("comment:`")+1);
-		data.comment = t.substring(0,t.indexOf("`"));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		comment = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("text:`")+1);
-		data.text = t.substring(0,t.indexOf("`"));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		text = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+2);
 
 
-		return data;
+		return t;
 	}
 
 

@@ -34,23 +34,23 @@ public class FlagData extends AssetData
 	}
 
 
-
-	//===============================================================================================
-	public static FlagData fromBase64ZippedJSON(String b64)
-	{//===============================================================================================
-
-
-
-		String decode64 = Utils.decodeBase64String(b64);
-		String json = Utils.unzipString(decode64);
-
-		//Gson gson = new Gson();
-		//FlagData data = gson.fromJson(json,FlagData.class);
-
-		return fromJSON(json);
-	}
-
-
+//
+//	//===============================================================================================
+//	public static FlagData fromBase64ZippedJSON(String b64)
+//	{//===============================================================================================
+//
+//
+//
+//		String decode64 = Utils.decodeBase64String(b64);
+//		String json = Utils.unzipString(decode64);
+//
+//		//Gson gson = new Gson();
+//		//FlagData data = gson.fromJson(json,FlagData.class);
+//
+//		return fromJSON(json);
+//	}
+//
+//
 	//===============================================================================================
 	public static FlagData fromJSON(String json)
 	{//===============================================================================================
@@ -99,26 +99,16 @@ public class FlagData extends AssetData
 	}
 
 
-	//===============================================================================================
-	public static FlagData fromString(String text)
-	{//===============================================================================================
-
-		FlagData data = new FlagData();
-
-		String t = new String(text);
 
 
-		t = t.substring(t.indexOf("name:`")+1);
-		data.name = t.substring(0,t.indexOf("`"));
-		t = t.substring(t.indexOf("`,")+1);
-
-		t = t.substring(t.indexOf("id:`")+1);
-		data.id = Integer.parseInt(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+	public String initFromString(String t)
+	{
+		t = super.initFromString(t);
 
 
 
-		return data;
+
+		return t;
 	}
 
 

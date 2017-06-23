@@ -47,23 +47,23 @@ public class MapStateData extends AssetData
 	}
 
 
-	//===============================================================================================
-	public static MapStateData fromBase64ZippedJSON(String b64)
-	{//===============================================================================================
-
-
-
-		String decode64 = Utils.decodeBase64String(b64);
-		String json = Utils.unzipString(decode64);
-
-		//Gson gson = new Gson();
-		//MapStateData data = gson.fromJson(json,MapStateData.class);
-
-
-		return fromJSON(json);
-	}
-
-
+//	//===============================================================================================
+//	public static MapStateData fromBase64ZippedJSON(String b64)
+//	{//===============================================================================================
+//
+//
+//
+//		String decode64 = Utils.decodeBase64String(b64);
+//		String json = Utils.unzipString(decode64);
+//
+//		//Gson gson = new Gson();
+//		//MapStateData data = gson.fromJson(json,MapStateData.class);
+//
+//
+//		return fromJSON(json);
+//	}
+//
+//
 
 	//===============================================================================================
 	public static MapStateData fromJSON(String json)
@@ -115,78 +115,84 @@ public class MapStateData extends AssetData
 
 		s += "mapID:`"+mapID+"`,";
 
+		s += "lightDataList:{";
 		for(int i=0;i<lightDataList.size();i++)
 		{
-			s += "lightDataList:";
 			s += lightDataList.get(i).toString();
-
 		}
+		s += "},";
+
+		s += "entityDataList:{";
 		for(int i=0;i<entityDataList.size();i++)
 		{
-			s += "entityDataList:";
 			s += entityDataList.get(i).toString();
-
 		}
+		s += "},";
+
+		s += "areaDataList:{";
 		for(int i=0;i<areaDataList.size();i++)
 		{
-			s += "areaDataList:";
 			s += areaDataList.get(i).toString();
-
 		}
+		s += "},";
 
 		return s;
 	}
 
 
-	//===============================================================================================
-	public static MapStateData fromString(String text)
-	{//===============================================================================================
 
-		MapStateData data = new MapStateData();
+	public String initFromString(String t)
+	{
+		t = super.initFromString(t);
 
-		String t = new String(text);
-
-
-		t = t.substring(t.indexOf("name:`")+1);
-		data.name = t.substring(0,t.indexOf("`"));
-		t = t.substring(t.indexOf("`,")+1);
-
-		t = t.substring(t.indexOf("id:`")+1);
-		data.id = Integer.parseInt(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
 
 		t = t.substring(t.indexOf("mapID:`")+1);
-		data.mapID = Integer.parseInt(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		mapID = Integer.parseInt(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+2);
 
 
-		while(t.indexOf("lightDataList:")!=-1)
+
+		t = t.substring(t.indexOf("lightDataList:{")+1);
+		t = t.substring(t.indexOf("{")+1);
+		while(t.startsWith("}")==false)
 		{
-			t = t.substring(t.indexOf("lightDataList:")+1);
-			LightData d = LightData.fromString(t);
-			data.lightDataList.add(d);
+
+			LightData data = new LightData();
+			t = data.initFromString(t);
+			lightDataList.add(data);
+		}
+		t = t.substring(t.indexOf("}")+1);
+		t = t.substring(t.indexOf(",")+1);
+
+
+		t = t.substring(t.indexOf("entityDataList:{")+1);
+		t = t.substring(t.indexOf("{")+1);
+		while(t.startsWith("}")==false)
+		{
+			EntityData data = new EntityData();
+			t = data.initFromString(t);
+			entityDataList.add(data);
 
 		}
+		t = t.substring(t.indexOf("}")+1);
+		t = t.substring(t.indexOf(",")+1);
 
-		while(t.indexOf("entityDataList:")!=-1)
+
+		t = t.substring(t.indexOf("areaDataList:{")+1);
+		t = t.substring(t.indexOf("{")+1);
+		while(t.startsWith("}")==false)
 		{
-			t = t.substring(t.indexOf("entityDataList:`")+1);
-			EntityData d = EntityData.fromString(t);
-			data.entityDataList.add(d);
+			AreaData data = new AreaData();
+			t = data.initFromString(t);
+			areaDataList.add(data);
 
 		}
-
-		while(t.indexOf("areaDataList:")!=-1)
-		{
-			t = t.substring(t.indexOf("areaDataList:")+1);
-			AreaData d = AreaData.fromString(t);
-			data.areaDataList.add(d);
-
-		}
+		t = t.substring(t.indexOf("}")+1);
+		t = t.substring(t.indexOf(",")+1);
 
 
-
-		return data;
+		return t;
 
 
 	}

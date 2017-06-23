@@ -261,25 +261,25 @@ public class MapData extends AssetData
 
 
 
-
-	//===============================================================================================
-	public static MapData fromBase64ZippedJSON(String b64)
-	{//===============================================================================================
-
-
-
-
-		String decode64 = Utils.decodeBase64String(b64);
-		String json = Utils.unzipString(decode64);
-
-
-		//Gson gson = new Gson();
-		//MapData data = gson.fromJson(json,MapData.class);
-
-		return fromJSON(json);
-	}
-
-
+//
+//	//===============================================================================================
+//	public static MapData fromBase64ZippedJSON(String b64)
+//	{//===============================================================================================
+//
+//
+//
+//
+//		String decode64 = Utils.decodeBase64String(b64);
+//		String json = Utils.unzipString(decode64);
+//
+//
+//		//Gson gson = new Gson();
+//		//MapData data = gson.fromJson(json,MapData.class);
+//
+//		return fromJSON(json);
+//	}
+//
+//
 	//===============================================================================================
 	public static MapData fromJSON(String json)
 	{//===============================================================================================
@@ -359,154 +359,183 @@ public class MapData extends AssetData
 		s += "lightMaskMD5:`"+lightMaskMD5+"`,";
 		s += "paletteMD5:`"+paletteMD5+"`,";
 		s += "tilesMD5:`"+tilesMD5+"`,";
+
+
+		s += "stateDataList:{";
 		for(int i=0;i<stateDataList.size();i++)
 		{
-			s += "stateDataList:";
 			s += stateDataList.get(i).toString();
-
 		}
+		s += "},";
+
+
+		s += "eventDataList:{";
 		for(int i=0;i<eventDataList.size();i++)
 		{
-			s += "eventDataList:";
 			s += eventDataList.get(i).toString();
 		}
+		s += "},";
+
+
+		s += "doorDataList:{";
 		for(int i=0;i<doorDataList.size();i++)
 		{
-			s += "doorDataList:";
 			s += doorDataList.get(i).toString();
 		}
+		s += "},";
+
 
 		return s;
 	}
 
 
-	//===============================================================================================
-	public static MapData fromString(String text)
-	{//===============================================================================================
-
-		MapData data = new MapData();
-
-		String t = new String(text);
 
 
-		t = t.substring(t.indexOf("name:`")+1);
-		data.name = t.substring(0,t.indexOf("`"));
-		t = t.substring(t.indexOf("`,")+1);
+	public String initFromString(String t)
+	{
+		t = super.initFromString(t);
 
-		t = t.substring(t.indexOf("id:`")+1);
-		data.id = Integer.parseInt(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
 
 		t = t.substring(t.indexOf("mapNote:`")+1);
-		data.mapNote = t.substring(0,t.indexOf("`"));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		mapNote = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("widthTiles1X:`")+1);
-		data.widthTiles1X = Integer.parseInt(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		widthTiles1X = Integer.parseInt(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("heightTiles1X:`")+1);
-		data.heightTiles1X = Integer.parseInt(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		heightTiles1X = Integer.parseInt(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("maxRandoms:`")+1);
-		data.maxRandoms = Integer.parseInt(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		maxRandoms = Integer.parseInt(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("isOutside:`")+1);
-		data.isOutside = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		isOutside = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("preload:`")+1);
-		data.preload = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		preload = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("groundLayerMD5:`")+1);
-		data.groundLayerMD5 = t.substring(0,t.indexOf("`"));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		groundLayerMD5 = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("groundObjectsMD5:`")+1);
-		data.groundObjectsMD5 = t.substring(0,t.indexOf("`"));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		groundObjectsMD5 = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("groundShadowMD5:`")+1);
-		data.groundShadowMD5 = t.substring(0,t.indexOf("`"));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		groundShadowMD5 = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("objectsMD5:`")+1);
-		data.objectsMD5 = t.substring(0,t.indexOf("`"));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		objectsMD5 = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("objects2MD5:`")+1);
-		data.objects2MD5 = t.substring(0,t.indexOf("`"));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		objects2MD5 = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("objectShadowMD5:`")+1);
-		data.objectShadowMD5 = t.substring(0,t.indexOf("`"));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		objectShadowMD5 = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("aboveMD5:`")+1);
-		data.aboveMD5 = t.substring(0,t.indexOf("`"));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		aboveMD5 = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("above2MD5:`")+1);
-		data.above2MD5 = t.substring(0,t.indexOf("`"));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		above2MD5 = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("spriteShadowMD5:`")+1);
-		data.spriteShadowMD5 = t.substring(0,t.indexOf("`"));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		spriteShadowMD5 = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("groundShaderMD5:`")+1);
-		data.groundShaderMD5 = t.substring(0,t.indexOf("`"));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		groundShaderMD5 = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("cameraBoundsMD5:`")+1);
-		data.cameraBoundsMD5 = t.substring(0,t.indexOf("`"));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		cameraBoundsMD5 = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("hitBoundsMD5:`")+1);
-		data.hitBoundsMD5 = t.substring(0,t.indexOf("`"));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		hitBoundsMD5 = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("lightMaskMD5:`")+1);
-		data.lightMaskMD5 = t.substring(0,t.indexOf("`"));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		lightMaskMD5 = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("paletteMD5:`")+1);
-		data.paletteMD5 = t.substring(0,t.indexOf("`"));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		paletteMD5 = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("tilesMD5:`")+1);
-		data.tilesMD5 = t.substring(0,t.indexOf("`"));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		tilesMD5 = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+2);
 
-
-		while(t.indexOf("stateDataList:")!=-1)
+		t = t.substring(t.indexOf("stateDataList:{")+1);
+		t = t.substring(t.indexOf("{")+1);
+		while(t.startsWith("}")==false)
 		{
-			t = t.substring(t.indexOf("stateDataList:")+1);
-
-			MapStateData d = MapStateData.fromString(t);
-			data.stateDataList.add(d);
+			MapStateData data = new MapStateData();
+			t = data.initFromString(t);
+			stateDataList.add(data);
 		}
+		t = t.substring(t.indexOf("}")+1);
+		t = t.substring(t.indexOf(",")+1);
 
-		while(t.indexOf("eventDataList:")!=-1)
+		t = t.substring(t.indexOf("eventDataList:{")+1);
+		t = t.substring(t.indexOf("{")+1);
+		while(t.startsWith("}")==false)
 		{
-			t = t.substring(t.indexOf("eventDataList:")+1);
-			EventData d = EventData.fromString(t);
-			data.eventDataList.add(d);
+			EventData data = new EventData();
+			t = data.initFromString(t);
+			eventDataList.add(data);
 		}
+		t = t.substring(t.indexOf("}")+1);
+		t = t.substring(t.indexOf(",")+1);
 
-		while(t.indexOf("doorDataList:")!=-1)
+		t = t.substring(t.indexOf("doorDataList:{")+1);
+		t = t.substring(t.indexOf("{")+1);
+		while(t.startsWith("}")==false)
 		{
-			t = t.substring(t.indexOf("doorDataList:")+1);
-			DoorData d = DoorData.fromString(t);
-			data.doorDataList.add(d);
+			DoorData data = new DoorData();
+			t = data.initFromString(t);
+			doorDataList.add(data);
 		}
+		t = t.substring(t.indexOf("}")+1);
+		t = t.substring(t.indexOf(",")+1);
 
 
-
-		return data;
+		return t;
 
 
 	}

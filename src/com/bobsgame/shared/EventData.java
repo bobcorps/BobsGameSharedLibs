@@ -59,20 +59,20 @@ public class EventData extends AssetData
 
 
 
-	//===============================================================================================
-	public static EventData fromBase64ZippedJSON(String b64)
-	{//===============================================================================================
-
-		String decode64 = Utils.decodeBase64String(b64);
-		String json = Utils.unzipString(decode64);
-
-		//Gson gson = new Gson();
-		//EventData data = gson.fromJson(json,EventData.class);
-
-		return fromJSON(json);
-	}
-
-
+//	//===============================================================================================
+//	public static EventData fromBase64ZippedJSON(String b64)
+//	{//===============================================================================================
+//
+//		String decode64 = Utils.decodeBase64String(b64);
+//		String json = Utils.unzipString(decode64);
+//
+//		//Gson gson = new Gson();
+//		//EventData data = gson.fromJson(json,EventData.class);
+//
+//		return fromJSON(json);
+//	}
+//
+//
 	//===============================================================================================
 	public static EventData fromJSON(String json)
 	{//===============================================================================================
@@ -139,37 +139,30 @@ public class EventData extends AssetData
 	}
 
 
-	//===============================================================================================
-	public static EventData fromString(String text)
-	{//===============================================================================================
-
-		EventData data = new EventData();
-
-		String t = new String(text);
 
 
-		t = t.substring(t.indexOf("name:`")+1);
-		data.name = t.substring(0,t.indexOf("`"));
-		t = t.substring(t.indexOf("`,")+1);
+	public String initFromString(String t)
+	{
+		t = super.initFromString(t);
 
-		t = t.substring(t.indexOf("id:`")+1);
-		data.id = Integer.parseInt(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
 
 		t = t.substring(t.indexOf("type:`")+1);
-		data.type = Integer.parseInt(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		type = Integer.parseInt(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("comment:`")+1);
-		data.comment = t.substring(0,t.indexOf("`"));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		comment = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("text:`")+1);
-		data.text = t.substring(0,t.indexOf("`"));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		text = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+2);
 
 
-		return data;
+		return t;
 	}
 
 

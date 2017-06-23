@@ -41,23 +41,23 @@ public class GameStringData extends AssetData
 
 
 
-	//===============================================================================================
-	public static GameStringData fromBase64ZippedJSON(String b64)
-	{//===============================================================================================
-
-
-
-
-		String decode64 = Utils.decodeBase64String(b64);
-		String json = Utils.unzipString(decode64);
-
-		//Gson gson = new Gson();
-		//GameStringData data = gson.fromJson(json,GameStringData.class);
-
-		return fromJSON(json);
-	}
-
-
+//	//===============================================================================================
+//	public static GameStringData fromBase64ZippedJSON(String b64)
+//	{//===============================================================================================
+//
+//
+//
+//
+//		String decode64 = Utils.decodeBase64String(b64);
+//		String json = Utils.unzipString(decode64);
+//
+//		//Gson gson = new Gson();
+//		//GameStringData data = gson.fromJson(json,GameStringData.class);
+//
+//		return fromJSON(json);
+//	}
+//
+//
 
 	//===============================================================================================
 	public static GameStringData fromJSON(String json)
@@ -114,28 +114,19 @@ public class GameStringData extends AssetData
 	}
 
 
-	//===============================================================================================
-	public static GameStringData fromString(String text)
-	{//===============================================================================================
-
-		GameStringData data = new GameStringData();
-
-		String t = new String(text);
 
 
-		t = t.substring(t.indexOf("name:`")+1);
-		data.name = t.substring(0,t.indexOf("`"));
-		t = t.substring(t.indexOf("`,")+1);
+	public String initFromString(String t)
+	{
+		t = super.initFromString(t);
 
-		t = t.substring(t.indexOf("id:`")+1);
-		data.id = Integer.parseInt(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
 
 		t = t.substring(t.indexOf("text:`")+1);
-		data.text = t.substring(0,t.indexOf("`"));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		text = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+2);
 
-		return data;
+		return t;
 	}
 
 

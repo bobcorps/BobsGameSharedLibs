@@ -133,27 +133,27 @@ public class DoorData extends EntityData
 
 
 
-
-
-	//===============================================================================================
-	public static DoorData fromBase64ZippedJSON(String b64)
-	{//===============================================================================================
-
-
-
-		String decode64 = Utils.decodeBase64String(b64);
-		String json = Utils.unzipString(decode64);
-
-		//Gson gson = new Gson();
-		//DoorData data = gson.fromJson(json,DoorData.class);
-
-
-		return fromJSON(json);
-
-	}
-
-
-
+//
+//
+//	//===============================================================================================
+//	public static DoorData fromBase64ZippedJSON(String b64)
+//	{//===============================================================================================
+//
+//
+//
+//		String decode64 = Utils.decodeBase64String(b64);
+//		String json = Utils.unzipString(decode64);
+//
+//		//Gson gson = new Gson();
+//		//DoorData data = gson.fromJson(json,DoorData.class);
+//
+//
+//		return fromJSON(json);
+//
+//	}
+//
+//
+//
 	//===============================================================================================
 	public static DoorData fromJSON(String json)
 	{//===============================================================================================
@@ -185,8 +185,8 @@ public class DoorData extends EntityData
 
 		return data;
 	}
-
-
+//
+//
 
 
 	//===============================================================================================
@@ -240,77 +240,79 @@ public class DoorData extends EntityData
 	}
 
 
-	//===============================================================================================
-	public static DoorData fromString(String text)
-	{//===============================================================================================
 
-		DoorData data = new DoorData();
+	public String initFromString(String t)
+	{
+		t = super.initFromString(t);
 
-		String t = new String(text);
-
-
-		t = t.substring(t.indexOf("name:`")+1);
-		data.name = t.substring(0,t.indexOf("`"));
-		t = t.substring(t.indexOf("`,")+1);
-
-		t = t.substring(t.indexOf("id:`")+1);
-		data.id = Integer.parseInt(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
 
 		t = t.substring(t.indexOf("destinationTYPEID:`")+1);
-		data.destinationTYPEID = t.substring(0,t.indexOf("`"));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		destinationTYPEID = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("arrivalXPixels1X:`")+1);
-		data.arrivalXPixels1X = Integer.parseInt(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		arrivalXPixels1X = Integer.parseInt(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("arrivalYPixels1X:`")+1);
-		data.arrivalYPixels1X = Integer.parseInt(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		arrivalYPixels1X = Integer.parseInt(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("randomNPCSpawnPoint:`")+1);
-		data.randomNPCSpawnPoint = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		randomNPCSpawnPoint = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("randomSpawnChance:`")+1);
-		data.randomSpawnChance = Float.parseFloat(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		randomSpawnChance = Float.parseFloat(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("randomPointOfInterestOrExit:`")+1);
-		data.randomPointOfInterestOrExit = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		randomPointOfInterestOrExit = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("randomSpawnDelay:`")+1);
-		data.randomSpawnDelay = Integer.parseInt(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		randomSpawnDelay = Integer.parseInt(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("randomSpawnKids:`")+1);
-		data.randomSpawnKids = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		randomSpawnKids = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("randomSpawnAdults:`")+1);
-		data.randomSpawnAdults = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		randomSpawnAdults = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("randomSpawnMales:`")+1);
-		data.randomSpawnMales = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		randomSpawnMales = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("randomSpawnFemales:`")+1);
-		data.randomSpawnFemales = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		randomSpawnFemales = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("destinationMapName:`")+1);
-		data.destinationMapName = t.substring(0,t.indexOf("`"));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		destinationMapName = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+2);
 
 		t = t.substring(t.indexOf("destinationDoorName:`")+1);
-		data.destinationDoorName = t.substring(0,t.indexOf("`"));
-		t = t.substring(t.indexOf("`,")+1);
+		t = t.substring(t.indexOf("`")+1);
+		destinationDoorName = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+2);
 
 
-		return data;
+		return t;
 
 
 	}
