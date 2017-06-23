@@ -298,6 +298,328 @@ public class EntityData extends AssetData
 		return data;
 	}
 
+
+
+
+	//===============================================================================================
+	public String toString()
+	{//===============================================================================================
+
+		String s = "";
+
+		s = super.toString();
+
+
+
+
+
+
+
+
+
+		while(spriteName.contains("`"))
+		{
+			String front = spriteName.substring(0,spriteName.indexOf("`"));
+			String back = spriteName.substring(spriteName.indexOf("`")+1);
+			spriteName = front + back;
+		}
+
+
+
+		for(int i=0;i<behaviorList.size();i++)
+		{
+
+			String t = behaviorList.get(i);
+
+			while(t.contains("`"))
+			{
+				String front = t.substring(0,t.indexOf("`"));
+				String back = t.substring(t.indexOf("`")+1);
+				t = front + back;
+			}
+			behaviorList.remove(i);
+			behaviorList.add(i,t);
+
+		}
+
+
+		for(int i=0;i<connectionTYPEIDList.size();i++)
+		{
+
+			String t = connectionTYPEIDList.get(i);
+
+			while(t.contains("`"))
+			{
+				String front = t.substring(0,t.indexOf("`"));
+				String back = t.substring(t.indexOf("`")+1);
+				t = front + back;
+			}
+			connectionTYPEIDList.remove(i);
+			connectionTYPEIDList.add(i,t);
+
+		}
+
+		while(comment.contains("`"))
+		{
+			String front = comment.substring(0,comment.indexOf("`"));
+			String back = comment.substring(comment.indexOf("`")+1);
+			comment = front + back;
+		}
+
+
+
+
+		s += "spriteName:`"+spriteName+"`,";
+		s += "spawnXPixels1X:`"+spawnXPixels1X+"`,";
+		s += "spawnYPixels1X:`"+spawnYPixels1X+"`,";
+		s += "initialFrame:`"+initialFrame+"`,";
+		s += "pushable:`"+pushable+"`,";
+		s += "nonWalkable:`"+nonWalkable+"`,";
+		s += "toAlpha:`"+toAlpha+"`,";
+		s += "scale:`"+scale+"`,";
+		s += "disableShadow:`"+disableShadow+"`,";
+		s += "aboveTopLayer:`"+aboveTopLayer+"`,";
+		s += "layer:`"+layer+"`,";
+		s += "renderOrder:`"+renderOrder+"`,";
+		s += "aboveWhenEqual:`"+aboveWhenEqual+"`,";
+		s += "alwaysOnBottom:`"+alwaysOnBottom+"`,";
+		s += "alwaysOnTop:`"+alwaysOnTop+"`,";
+		s += "animateThroughFrames:`"+animateThroughFrames+"`,";
+		s += "ticksBetweenFrames:`"+ticksBetweenFrames+"`,";
+		s += "randomUpToTicksBetweenFrames:`"+randomUpToTicksBetweenFrames+"`,";
+		s += "randomFrames:`"+randomFrames+"`,";
+		s += "ticksBetweenAnimation:`"+ticksBetweenAnimation+"`,";
+		s += "randomTimeBetweenAnimation:`"+randomTimeBetweenAnimation+"`,";
+		s += "walkSpeed:`"+walkSpeed+"`,";
+		s += "ticksPerPixelMoved:`"+ticksPerPixelMoved+"`,";
+		s += "eventID:`"+eventID+"`,";
+		s += "onlyHereDuringEvent:`"+onlyHereDuringEvent+"`,";
+		s += "mapID:`"+mapID+"`,";
+		s += "stateID:`"+stateID+"`,";
+		s += "animateThroughCurrentAnimation:`"+animateThroughCurrentAnimation+"`,";
+		s += "loopAnimation:`"+loopAnimation+"`,";
+		s += "voicePitch:`"+voicePitch+"`,";
+		s += "animationDisabled:`"+animationDisabled+"`,";
+		s += "hitLayerDisabled:`"+hitLayerDisabled+"`,";
+		s += "ignoreHitPlayer:`"+ignoreHitPlayer+"`,";
+		s += "ignoreHitEntities:`"+ignoreHitEntities+"`,";
+		s += "dontUsePathfinding:`"+dontUsePathfinding+"`,";
+		s += "pullPlayer:`"+pullPlayer+"`,";
+		s += "pushPlayer:`"+pushPlayer+"`,";
+		for(int i=0;i<behaviorList.size();i++)
+		{
+			s += "behaviorList:`"+behaviorList.get(i)+"`,";
+		}
+		for(int i=0;i<connectionTYPEIDList.size();i++)
+		{
+			s += "connectionTYPEIDList:`"+connectionTYPEIDList.get(i)+"`,";
+		}
+		s += "comment:`"+comment+"`,";
+		s += "isNPC:`"+isNPC+"`,";
+
+
+
+
+		return s;
+	}
+
+
+	//===============================================================================================
+	public static EntityData fromString(String text)
+	{//===============================================================================================
+
+		EntityData data = new EntityData();
+
+		String t = new String(text);
+
+
+		t = t.substring(t.indexOf("name:`")+1);
+		data.name = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("id:`")+1);
+		data.id = Integer.parseInt(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+
+
+		t = t.substring(t.indexOf("spriteName:`")+1);
+		data.spriteName = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("spawnXPixels1X:`")+1);
+		data.spawnXPixels1X = Float.parseFloat(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("spawnYPixels1X:`")+1);
+		data.spawnYPixels1X = Float.parseFloat(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("initialFrame:`")+1);
+		data.initialFrame = Integer.parseInt(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("pushable:`")+1);
+		data.pushable = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("nonWalkable:`")+1);
+		data.nonWalkable = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("toAlpha:`")+1);
+		data.toAlpha = Float.parseFloat(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("scale:`")+1);
+		data.scale = Float.parseFloat(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("disableShadow:`")+1);
+		data.disableShadow = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("aboveTopLayer:`")+1);
+		data.aboveTopLayer = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("layer:`")+1);
+		data.layer = Integer.parseInt(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("renderOrder:`")+1);
+		data.renderOrder = RenderOrder.valueOf(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("aboveWhenEqual:`")+1);
+		data.aboveWhenEqual = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("alwaysOnBottom:`")+1);
+		data.alwaysOnBottom = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("alwaysOnTop:`")+1);
+		data.alwaysOnTop = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("animateThroughFrames:`")+1);
+		data.animateThroughFrames = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("ticksBetweenFrames:`")+1);
+		data.ticksBetweenFrames = Integer.parseInt(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("randomUpToTicksBetweenFrames:`")+1);
+		data.randomUpToTicksBetweenFrames = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("randomFrames:`")+1);
+		data.randomFrames = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("ticksBetweenAnimation:`")+1);
+		data.ticksBetweenAnimation = Integer.parseInt(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("randomTimeBetweenAnimation:`")+1);
+		data.randomTimeBetweenAnimation = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("walkSpeed:`")+1);
+		data.walkSpeed = Integer.parseInt(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("ticksPerPixelMoved:`")+1);
+		data.ticksPerPixelMoved = Float.parseFloat(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("eventID:`")+1);
+		data.eventID = Integer.parseInt(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("onlyHereDuringEvent:`")+1);
+		data.onlyHereDuringEvent = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("mapID:`")+1);
+		data.mapID = Integer.parseInt(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("stateID:`")+1);
+		data.stateID = Integer.parseInt(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("animateThroughCurrentAnimation:`")+1);
+		data.animateThroughCurrentAnimation = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("loopAnimation:`")+1);
+		data.loopAnimation = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("voicePitch:`")+1);
+		data.voicePitch = Float.parseFloat(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("animationDisabled:`")+1);
+		data.animationDisabled = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("hitLayerDisabled:`")+1);
+		data.hitLayerDisabled = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("ignoreHitPlayer:`")+1);
+		data.ignoreHitPlayer = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("ignoreHitEntities:`")+1);
+		data.ignoreHitEntities = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("dontUsePathfinding:`")+1);
+		data.dontUsePathfinding = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("pullPlayer:`")+1);
+		data.pullPlayer = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("pushPlayer:`")+1);
+		data.pushPlayer = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		while(t.indexOf("behaviorList:`")!=-1)
+		{
+			t = t.substring(t.indexOf("behaviorList:`")+1);
+			data.behaviorList.add(t.substring(0,t.indexOf("`")));
+			t = t.substring(t.indexOf("`,")+1);
+		}
+
+		while(t.indexOf("connectionTYPEIDList:`")!=-1)
+		{
+			t = t.substring(t.indexOf("connectionTYPEIDList:`")+1);
+			data.connectionTYPEIDList.add(t.substring(0,t.indexOf("`")));
+			t = t.substring(t.indexOf("`,")+1);
+		}
+
+		t = t.substring(t.indexOf("comment:`")+1);
+		data.comment = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("isNPC:`")+1);
+		data.isNPC = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		return data;
+
+
+	}
+
+
+
 	//===============================================================================================
 	public String getTYPEIDString()
 	{//===============================================================================================

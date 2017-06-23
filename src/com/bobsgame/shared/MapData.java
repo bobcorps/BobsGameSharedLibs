@@ -16,6 +16,7 @@ import org.apache.commons.codec.binary.StringUtils;
 import com.bobsgame.shared.EventData;
 import com.bobsgame.shared.DoorData;
 import com.bobsgame.shared.MapStateData;
+import com.bobsgame.shared.MapData.RenderOrder;
 import com.bobsgame.shared.AssetData;
 import com.google.gson.Gson;
 
@@ -230,7 +231,6 @@ public class MapData extends AssetData
 
 
 
-
 	//=========================================================================================================================
 	public MapData()
 	{//=========================================================================================================================
@@ -313,6 +313,200 @@ public class MapData extends AssetData
 
 		return data;
 
+
+
+	}
+
+
+
+	//===============================================================================================
+	public String toString()
+	{//===============================================================================================
+
+		String s = "";
+
+		s = super.toString();
+
+
+
+		while(mapNote.contains("`"))
+		{
+			String front = mapNote.substring(0,mapNote.indexOf("`"));
+			String back = mapNote.substring(mapNote.indexOf("`")+1);
+			mapNote = front + back;
+		}
+
+
+
+		s += "mapNote:`"+mapNote+"`,";
+		s += "widthTiles1X:`"+widthTiles1X+"`,";
+		s += "heightTiles1X:`"+heightTiles1X+"`,";
+		s += "maxRandoms:`"+maxRandoms+"`,";
+		s += "isOutside:`"+isOutside+"`,";
+		s += "preload:`"+preload+"`,";
+		s += "groundLayerMD5:`"+groundLayerMD5+"`,";
+		s += "groundObjectsMD5:`"+groundObjectsMD5+"`,";
+		s += "groundShadowMD5:`"+groundShadowMD5+"`,";
+		s += "objectsMD5:`"+objectsMD5+"`,";
+		s += "objects2MD5:`"+objects2MD5+"`,";
+		s += "objectShadowMD5:`"+objectShadowMD5+"`,";
+		s += "aboveMD5:`"+aboveMD5+"`,";
+		s += "above2MD5:`"+above2MD5+"`,";
+		s += "spriteShadowMD5:`"+spriteShadowMD5+"`,";
+		s += "groundShaderMD5:`"+groundShaderMD5+"`,";
+		s += "cameraBoundsMD5:`"+cameraBoundsMD5+"`,";
+		s += "hitBoundsMD5:`"+hitBoundsMD5+"`,";
+		s += "lightMaskMD5:`"+lightMaskMD5+"`,";
+		s += "paletteMD5:`"+paletteMD5+"`,";
+		s += "tilesMD5:`"+tilesMD5+"`,";
+		for(int i=0;i<stateDataList.size();i++)
+		{
+			s += "stateDataList:";
+			s += stateDataList.get(i).toString();
+
+		}
+		for(int i=0;i<eventDataList.size();i++)
+		{
+			s += "eventDataList:";
+			s += eventDataList.get(i).toString();
+		}
+		for(int i=0;i<doorDataList.size();i++)
+		{
+			s += "doorDataList:";
+			s += doorDataList.get(i).toString();
+		}
+
+		return s;
+	}
+
+
+	//===============================================================================================
+	public static MapData fromString(String text)
+	{//===============================================================================================
+
+		MapData data = new MapData();
+
+		String t = new String(text);
+
+
+		t = t.substring(t.indexOf("name:`")+1);
+		data.name = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("id:`")+1);
+		data.id = Integer.parseInt(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("mapNote:`")+1);
+		data.mapNote = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("widthTiles1X:`")+1);
+		data.widthTiles1X = Integer.parseInt(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("heightTiles1X:`")+1);
+		data.heightTiles1X = Integer.parseInt(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("maxRandoms:`")+1);
+		data.maxRandoms = Integer.parseInt(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("isOutside:`")+1);
+		data.isOutside = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("preload:`")+1);
+		data.preload = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("groundLayerMD5:`")+1);
+		data.groundLayerMD5 = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("groundObjectsMD5:`")+1);
+		data.groundObjectsMD5 = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("groundShadowMD5:`")+1);
+		data.groundShadowMD5 = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("objectsMD5:`")+1);
+		data.objectsMD5 = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("objects2MD5:`")+1);
+		data.objects2MD5 = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("objectShadowMD5:`")+1);
+		data.objectShadowMD5 = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("aboveMD5:`")+1);
+		data.aboveMD5 = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("above2MD5:`")+1);
+		data.above2MD5 = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("spriteShadowMD5:`")+1);
+		data.spriteShadowMD5 = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("groundShaderMD5:`")+1);
+		data.groundShaderMD5 = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("cameraBoundsMD5:`")+1);
+		data.cameraBoundsMD5 = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("hitBoundsMD5:`")+1);
+		data.hitBoundsMD5 = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("lightMaskMD5:`")+1);
+		data.lightMaskMD5 = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("paletteMD5:`")+1);
+		data.paletteMD5 = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("tilesMD5:`")+1);
+		data.tilesMD5 = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+1);
+
+
+		while(t.indexOf("stateDataList:")!=-1)
+		{
+			t = t.substring(t.indexOf("stateDataList:")+1);
+
+			MapStateData d = MapStateData.fromString(t);
+			data.stateDataList.add(d);
+		}
+
+		while(t.indexOf("eventDataList:")!=-1)
+		{
+			t = t.substring(t.indexOf("eventDataList:")+1);
+			EventData d = EventData.fromString(t);
+			data.eventDataList.add(d);
+		}
+
+		while(t.indexOf("doorDataList:")!=-1)
+		{
+			t = t.substring(t.indexOf("doorDataList:")+1);
+			DoorData d = DoorData.fromString(t);
+			data.doorDataList.add(d);
+		}
+
+
+
+		return data;
 
 
 	}

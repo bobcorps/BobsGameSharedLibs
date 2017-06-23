@@ -84,6 +84,46 @@ public class FlagData extends AssetData
 
 	}
 
+
+	//===============================================================================================
+	public String toString()
+	{//===============================================================================================
+
+		String s = "";
+
+		s = super.toString();
+
+
+
+		return s;
+	}
+
+
+	//===============================================================================================
+	public static FlagData fromString(String text)
+	{//===============================================================================================
+
+		FlagData data = new FlagData();
+
+		String t = new String(text);
+
+
+		t = t.substring(t.indexOf("name:`")+1);
+		data.name = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("id:`")+1);
+		data.id = Integer.parseInt(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+
+
+		return data;
+	}
+
+
+
+
 	//===============================================================================================
 	public String getTYPEIDString()
 	{//===============================================================================================

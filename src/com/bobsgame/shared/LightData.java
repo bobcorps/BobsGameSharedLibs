@@ -2,6 +2,7 @@ package com.bobsgame.shared;
 
 import java.io.IOException;
 
+import com.bobsgame.shared.MapData.RenderOrder;
 import com.google.gson.Gson;
 
 
@@ -12,22 +13,16 @@ public class LightData extends EntityData
 
 	private int widthPixels1X = 2;
 	private int heightPixels1X = 2;
-
-
 	private int redColorByte=0;
 	private int greenColorByte=0;
 	private int blueColorByte=0;
 	private int alphaColorByte=0;
-
 	private int radiusPixels1X = 2;
-
 	private float blendFalloff = 2.0f;
-
 	private float decayExponent = 1.0f;
 	private int focusRadius1X = 0;
 	private boolean isDayLight = true;
 	private boolean isNightLight = false;
-
 	private boolean flickers = false;
 	private boolean changesColor = false;
 	private boolean toggleable = false;
@@ -191,6 +186,159 @@ public class LightData extends EntityData
 		return data;
 
 	}
+
+
+
+
+
+	//===============================================================================================
+	public String toString()
+	{//===============================================================================================
+
+		String s = "";
+
+		s = super.toString();
+
+
+		s += "widthPixels1X:`"+widthPixels1X+"`,";
+		s += "heightPixels1X:`"+heightPixels1X+"`,";
+		s += "redColorByte:`"+redColorByte+"`,";
+		s += "greenColorByte:`"+greenColorByte+"`,";
+		s += "blueColorByte:`"+blueColorByte+"`,";
+		s += "alphaColorByte:`"+alphaColorByte+"`,";
+		s += "radiusPixels1X:`"+radiusPixels1X+"`,";
+		s += "blendFalloff:`"+blendFalloff+"`,";
+		s += "decayExponent:`"+decayExponent+"`,";
+		s += "focusRadius1X:`"+focusRadius1X+"`,";
+		s += "isDayLight:`"+isDayLight+"`,";
+		s += "isNightLight:`"+isNightLight+"`,";
+		s += "flickers:`"+flickers+"`,";
+		s += "changesColor:`"+changesColor+"`,";
+		s += "toggleable:`"+toggleable+"`,";
+		s += "toggleXPixels1X:`"+toggleXPixels1X+"`,";
+		s += "toggleYPixels1X:`"+toggleYPixels1X+"`,";
+		s += "flickerOnTicks:`"+flickerOnTicks+"`,";
+		s += "flickerOffTicks:`"+flickerOffTicks+"`,";
+		s += "flickerRandomUpToOnTicks:`"+flickerRandomUpToOnTicks+"`,";
+		s += "flickerRandomUpToOffTicks:`"+flickerRandomUpToOffTicks+"`,";
+
+
+		return s;
+	}
+
+
+	//===============================================================================================
+	public static LightData fromString(String text)
+	{//===============================================================================================
+
+		LightData data = new LightData();
+
+		String t = new String(text);
+
+
+		t = t.substring(t.indexOf("name:`")+1);
+		data.name = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("id:`")+1);
+		data.id = Integer.parseInt(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+
+		t = t.substring(t.indexOf("widthPixels1X:`")+1);
+		data.widthPixels1X = Integer.parseInt(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("heightPixels1X:`")+1);
+		data.heightPixels1X = Integer.parseInt(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("redColorByte:`")+1);
+		data.redColorByte = Integer.parseInt(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("greenColorByte:`")+1);
+		data.greenColorByte = Integer.parseInt(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("blueColorByte:`")+1);
+		data.blueColorByte = Integer.parseInt(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("alphaColorByte:`")+1);
+		data.alphaColorByte = Integer.parseInt(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("radiusPixels1X:`")+1);
+		data.radiusPixels1X = Integer.parseInt(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("blendFalloff:`")+1);
+		data.blendFalloff = Float.parseFloat(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("decayExponent:`")+1);
+		data.decayExponent = Float.parseFloat(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("focusRadius1X:`")+1);
+		data.focusRadius1X = Integer.parseInt(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("isDayLight:`")+1);
+		data.isDayLight = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("isNightLight:`")+1);
+		data.isNightLight = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("flickers:`")+1);
+		data.flickers = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("changesColor:`")+1);
+		data.changesColor = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("toggleable:`")+1);
+		data.toggleable = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("toggleXPixels1X:`")+1);
+		data.toggleXPixels1X = Integer.parseInt(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("toggleYPixels1X:`")+1);
+		data.toggleYPixels1X = Integer.parseInt(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("flickerOnTicks:`")+1);
+		data.flickerOnTicks = Integer.parseInt(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("flickerOffTicks:`")+1);
+		data.flickerOffTicks = Integer.parseInt(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("flickerRandomUpToOnTicks:`")+1);
+		data.flickerRandomUpToOnTicks = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("flickerRandomUpToOffTicks:`")+1);
+		data.flickerRandomUpToOffTicks = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+
+
+		return data;
+
+
+	}
+
+
+
+
 
 
 	//===============================================================================================

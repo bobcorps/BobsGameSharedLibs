@@ -155,6 +155,82 @@ public class DialogueData extends AssetData
 	}
 
 
+
+
+	//===============================================================================================
+	public String toString()
+	{//===============================================================================================
+
+		String s = "";
+
+		s = super.toString();
+
+		while(caption.contains("`"))
+		{
+			String front = caption.substring(0,caption.indexOf("`"));
+			String back = caption.substring(caption.indexOf("`")+1);
+			caption = front + back;
+		}
+
+		while(comment.contains("`"))
+		{
+			String front = comment.substring(0,comment.indexOf("`"));
+			String back = comment.substring(comment.indexOf("`")+1);
+			comment = front + back;
+		}
+
+		while(text.contains("`"))
+		{
+			String front = text.substring(0,text.indexOf("`"));
+			String back = text.substring(text.indexOf("`")+1);
+			text = front + back;
+		}
+
+		s += "caption:`"+caption+"`,";
+		s += "comment:`"+comment+"`,";
+		s += "text:`"+text+"`,";
+
+
+		return s;
+	}
+
+
+	//===============================================================================================
+	public static DialogueData fromString(String text)
+	{//===============================================================================================
+
+		DialogueData data = new DialogueData();
+
+		String t = new String(text);
+
+
+		t = t.substring(t.indexOf("name:`")+1);
+		data.name = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("id:`")+1);
+		data.id = Integer.parseInt(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("caption:`")+1);
+		data.caption = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("comment:`")+1);
+		data.comment = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("text:`")+1);
+		data.text = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+1);
+
+
+		return data;
+	}
+
+
+
+
 	//===============================================================================================
 	public String getTYPEIDString()
 	{//===============================================================================================

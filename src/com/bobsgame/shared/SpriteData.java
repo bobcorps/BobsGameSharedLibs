@@ -207,6 +207,232 @@ public class SpriteData extends AssetData
 	}
 
 
+
+	//===============================================================================================
+	public String toString()
+	{//===============================================================================================
+
+		String s = "";
+
+		s = super.toString();
+
+
+
+
+
+
+
+		s += "comment:`"+comment+"`,";
+		s += "displayName:`"+displayName+"`,";
+		s += "widthPixels1X:`"+widthPixels1X+"`,";
+		s += "heightPixels1X:`"+heightPixels1X+"`,";
+		s += "frames:`"+frames+"`,";
+		s += "isNPC:`"+isNPC+"`,";
+		s += "isKid:`"+isKid+"`,";
+		s += "isAdult:`"+isAdult+"`,";
+		s += "isMale:`"+isMale+"`,";
+		s += "isFemale:`"+isFemale+"`,";
+		s += "isCar:`"+isCar+"`,";
+		s += "isAnimal:`"+isAnimal+"`,";
+		s += "hasShadow:`"+hasShadow+"`,";
+		s += "isRandom:`"+isRandom+"`,";
+		s += "isDoor:`"+isDoor+"`,";
+		s += "isGame:`"+isGame+"`,";
+		s += "isItem:`"+isItem+"`,";
+		s += "forceHQ2X:`"+forceHQ2X+"`,";
+		s += "forceMD5Export:`"+forceMD5Export+"`,";
+		s += "eventID:`"+eventID+"`,";
+		s += "itemGameDescription:`"+itemGameDescription+"`,";
+		s += "gamePrice:`"+gamePrice+"`,";
+		s += "utilityOffsetXPixels1X:`"+utilityOffsetXPixels1X+"`,";
+		s += "utilityOffsetYPixels1X:`"+utilityOffsetYPixels1X+"`,";
+		s += "dataMD5:`"+dataMD5+"`,";
+		s += "paletteMD5:`"+paletteMD5+"`,";
+		for(int i=0;i<animationList.size();i++)
+		{
+
+			s += "animationList:";
+			s += "frameSequenceName:`"+animationList.get(i).frameSequenceName+"`,";
+			s += "frameStart:`"+animationList.get(i).frameStart+"`,";
+			s += "hitBoxFromLeftPixels1X:`"+animationList.get(i).hitBoxFromLeftPixels1X+"`,";
+			s += "hitBoxFromRightPixels1X:`"+animationList.get(i).hitBoxFromRightPixels1X+"`,";
+			s += "hitBoxFromTopPixels1X:`"+animationList.get(i).hitBoxFromTopPixels1X+"`,";
+			s += "hitBoxFromBottomPixels1X:`"+animationList.get(i).hitBoxFromBottomPixels1X+"`,";
+		}
+
+
+
+		return s;
+	}
+
+
+	//===============================================================================================
+	public static SpriteData fromString(String text)
+	{//===============================================================================================
+
+		SpriteData data = new SpriteData();
+
+		String t = new String(text);
+
+
+		t = t.substring(t.indexOf("name:`")+1);
+		data.name = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("id:`")+1);
+		data.id = Integer.parseInt(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+
+		t = t.substring(t.indexOf("comment:`")+1);
+		data.comment = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("displayName:`")+1);
+		data.displayName = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("widthPixels1X:`")+1);
+		data.widthPixels1X = Integer.parseInt(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("heightPixels1X:`")+1);
+		data.heightPixels1X = Integer.parseInt(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("frames:`")+1);
+		data.frames = Integer.parseInt(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("isNPC:`")+1);
+		data.isNPC = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("isKid:`")+1);
+		data.isKid = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("isAdult:`")+1);
+		data.isAdult = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("isMale:`")+1);
+		data.isMale = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("isFemale:`")+1);
+		data.isFemale = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("isCar:`")+1);
+		data.isCar = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("isAnimal:`")+1);
+		data.isAnimal = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("hasShadow:`")+1);
+		data.hasShadow = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("isRandom:`")+1);
+		data.isRandom = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("isDoor:`")+1);
+		data.isDoor = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("isGame:`")+1);
+		data.isGame = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("isItem:`")+1);
+		data.isItem = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("forceHQ2X:`")+1);
+		data.forceHQ2X = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("forceMD5Export:`")+1);
+		data.forceMD5Export = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("eventID:`")+1);
+		data.eventID = Integer.parseInt(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("itemGameDescription:`")+1);
+		data.itemGameDescription = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("gamePrice:`")+1);
+		data.gamePrice = Float.parseFloat(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("utilityOffsetXPixels1X:`")+1);
+		data.utilityOffsetXPixels1X = Integer.parseInt(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("utilityOffsetYPixels1X:`")+1);
+		data.utilityOffsetYPixels1X = Integer.parseInt(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("dataMD5:`")+1);
+		data.dataMD5 = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("paletteMD5:`")+1);
+		data.paletteMD5 = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+1);
+
+
+
+		while(t.indexOf("animationList:")!=-1)
+		{
+			String frameSequenceName = "";
+			int frameStart = 0;
+			int hitBoxFromLeftPixels1X = 0;
+			int hitBoxFromRightPixels1X = 0;
+			int hitBoxFromTopPixels1X = 0;
+			int hitBoxFromBottomPixels1X = 0;
+
+			t = t.substring(t.indexOf("frameSequenceName:`")+1);
+			frameSequenceName = t.substring(0,t.indexOf("`"));
+			t = t.substring(t.indexOf("`,")+1);
+
+			t = t.substring(t.indexOf("frameStart:`")+1);
+			frameStart = Integer.parseInt(t.substring(0,t.indexOf("`")));
+			t = t.substring(t.indexOf("`,")+1);
+
+			t = t.substring(t.indexOf("hitBoxFromLeftPixels1X:`")+1);
+			hitBoxFromLeftPixels1X = Integer.parseInt(t.substring(0,t.indexOf("`")));
+			t = t.substring(t.indexOf("`,")+1);
+
+			t = t.substring(t.indexOf("hitBoxFromRightPixels1X:`")+1);
+			hitBoxFromRightPixels1X = Integer.parseInt(t.substring(0,t.indexOf("`")));
+			t = t.substring(t.indexOf("`,")+1);
+
+			t = t.substring(t.indexOf("hitBoxFromTopPixels1X:`")+1);
+			hitBoxFromTopPixels1X = Integer.parseInt(t.substring(0,t.indexOf("`")));
+			t = t.substring(t.indexOf("`,")+1);
+
+			t = t.substring(t.indexOf("hitBoxFromBottomPixels1X:`")+1);
+			hitBoxFromBottomPixels1X = Integer.parseInt(t.substring(0,t.indexOf("`")));
+			t = t.substring(t.indexOf("`,")+1);
+
+			SpriteAnimationSequence s = new SpriteAnimationSequence(frameSequenceName, frameStart, hitBoxFromLeftPixels1X, hitBoxFromRightPixels1X, hitBoxFromTopPixels1X, hitBoxFromBottomPixels1X);
+			data.animationList.add(s);
+		}
+
+		return data;
+
+
+	}
+
+
 	//===============================================================================================
 	public String getTYPEIDString()
 	{//===============================================================================================

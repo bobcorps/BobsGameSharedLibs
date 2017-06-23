@@ -186,6 +186,138 @@ public class DoorData extends EntityData
 		return data;
 	}
 
+
+
+
+	//===============================================================================================
+	public String toString()
+	{//===============================================================================================
+
+		String s = "";
+
+		s = super.toString();
+
+
+
+
+		while(destinationTYPEID.contains("`"))
+		{
+			String front = destinationTYPEID.substring(0,destinationTYPEID.indexOf("`"));
+			String back = destinationTYPEID.substring(destinationTYPEID.indexOf("`")+1);
+			destinationTYPEID = front + back;
+		}
+
+		while(destinationMapName.contains("`"))
+		{
+			String front = destinationMapName.substring(0,destinationMapName.indexOf("`"));
+			String back = destinationMapName.substring(destinationMapName.indexOf("`")+1);
+			destinationMapName = front + back;
+		}
+
+		while(destinationDoorName.contains("`"))
+		{
+			String front = destinationDoorName.substring(0,destinationDoorName.indexOf("`"));
+			String back = destinationDoorName.substring(destinationDoorName.indexOf("`")+1);
+			destinationDoorName = front + back;
+		}
+
+		s += "destinationTYPEID:`"+destinationTYPEID+"`,";
+		s += "arrivalXPixels1X:`"+arrivalXPixels1X+"`,";
+		s += "arrivalYPixels1X:`"+arrivalYPixels1X+"`,";
+		s += "randomNPCSpawnPoint:`"+randomNPCSpawnPoint+"`,";
+		s += "randomSpawnChance:`"+randomSpawnChance+"`,";
+		s += "randomPointOfInterestOrExit:`"+randomPointOfInterestOrExit+"`,";
+		s += "randomSpawnDelay:`"+randomSpawnDelay+"`,";
+		s += "randomSpawnKids:`"+randomSpawnKids+"`,";
+		s += "randomSpawnAdults:`"+randomSpawnAdults+"`,";
+		s += "randomSpawnMales:`"+randomSpawnMales+"`,";
+		s += "randomSpawnFemales:`"+randomSpawnFemales+"`,";
+		s += "destinationMapName:`"+destinationMapName+"`,";
+		s += "destinationDoorName:`"+destinationDoorName+"`,";
+
+
+		return s;
+	}
+
+
+	//===============================================================================================
+	public static DoorData fromString(String text)
+	{//===============================================================================================
+
+		DoorData data = new DoorData();
+
+		String t = new String(text);
+
+
+		t = t.substring(t.indexOf("name:`")+1);
+		data.name = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("id:`")+1);
+		data.id = Integer.parseInt(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("destinationTYPEID:`")+1);
+		data.destinationTYPEID = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("arrivalXPixels1X:`")+1);
+		data.arrivalXPixels1X = Integer.parseInt(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("arrivalYPixels1X:`")+1);
+		data.arrivalYPixels1X = Integer.parseInt(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("randomNPCSpawnPoint:`")+1);
+		data.randomNPCSpawnPoint = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("randomSpawnChance:`")+1);
+		data.randomSpawnChance = Float.parseFloat(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("randomPointOfInterestOrExit:`")+1);
+		data.randomPointOfInterestOrExit = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("randomSpawnDelay:`")+1);
+		data.randomSpawnDelay = Integer.parseInt(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("randomSpawnKids:`")+1);
+		data.randomSpawnKids = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("randomSpawnAdults:`")+1);
+		data.randomSpawnAdults = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("randomSpawnMales:`")+1);
+		data.randomSpawnMales = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("randomSpawnFemales:`")+1);
+		data.randomSpawnFemales = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("destinationMapName:`")+1);
+		data.destinationMapName = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("destinationDoorName:`")+1);
+		data.destinationDoorName = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+1);
+
+
+		return data;
+
+
+	}
+
+
+
+
 	//===============================================================================================
 	public String getTYPEIDString()
 	{//===============================================================================================

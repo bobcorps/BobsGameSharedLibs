@@ -240,6 +240,8 @@ public class AreaData extends AssetData
 		Gson gson = new Gson();
 		AreaData data = gson.fromJson(json,AreaData.class);
 
+
+
 //		ObjectMapper mapper = new ObjectMapper();
 //		AreaData data = null;
 //
@@ -260,8 +262,269 @@ public class AreaData extends AssetData
 //			e.printStackTrace();
 //		}
 
+
 		return data;
 
+	}
+
+
+
+
+	//===============================================================================================
+	public String toString()
+	{//===============================================================================================
+
+		String s = "";
+
+		s = super.toString();
+
+		while(comment.contains("`"))
+		{
+			String front = comment.substring(0,comment.indexOf("`"));
+			String back = comment.substring(comment.indexOf("`")+1);
+			comment = front + back;
+		}
+
+		while(destinationTYPEID.contains("`"))
+		{
+			String front = destinationTYPEID.substring(0,destinationTYPEID.indexOf("`"));
+			String back = destinationTYPEID.substring(destinationTYPEID.indexOf("`")+1);
+			destinationTYPEID = front + back;
+		}
+
+		while(destinationMapName.contains("`"))
+		{
+			String front = destinationMapName.substring(0,destinationMapName.indexOf("`"));
+			String back = destinationMapName.substring(destinationMapName.indexOf("`")+1);
+			destinationMapName = front + back;
+		}
+
+		while(destinationWarpAreaName.contains("`"))
+		{
+			String front = destinationWarpAreaName.substring(0,destinationWarpAreaName.indexOf("`"));
+			String back = destinationWarpAreaName.substring(destinationWarpAreaName.indexOf("`")+1);
+			destinationWarpAreaName = front + back;
+		}
+
+
+
+		for(int i=0;i<connectionTYPEIDList.size();i++)
+		{
+
+			String t = connectionTYPEIDList.get(i);
+
+			while(t.contains("`"))
+			{
+				String front = t.substring(0,t.indexOf("`"));
+				String back = t.substring(t.indexOf("`")+1);
+				t = front + back;
+			}
+			connectionTYPEIDList.remove(i);
+			connectionTYPEIDList.add(i,t);
+
+		}
+
+
+		s += "mapXPixels1X:`"+mapXPixels1X+"`,";
+		s += "mapYPixels1X:`"+mapYPixels1X+"`,";
+		s += "widthPixels1X:`"+widthPixels1X+"`,";
+		s += "heightPixels1X:`"+heightPixels1X+"`,";
+		s += "randomPointOfInterestOrExit:`"+randomPointOfInterestOrExit+"`,";
+		s += "randomNPCSpawnPoint:`"+randomNPCSpawnPoint+"`,";
+		s += "standSpawnDirection:`"+standSpawnDirection+"`,";
+		s += "waitHereTicks:`"+waitHereTicks+"`,";
+		s += "randomWaitTime:`"+randomWaitTime+"`,";
+		s += "onlyOneAllowed:`"+onlyOneAllowed+"`,";
+		s += "randomNPCStayHere:`"+randomNPCStayHere+"`,";
+		s += "randomSpawnChance:`"+randomSpawnChance+"`,";
+		s += "randomSpawnOnlyTryOnce:`"+randomSpawnOnlyTryOnce+"`,";
+		s += "randomSpawnOnlyOffscreen:`"+randomSpawnOnlyOffscreen+"`,";
+		s += "randomSpawnDelay:`"+randomSpawnDelay+"`,";
+		s += "randomSpawnKids:`"+randomSpawnKids+"`,";
+		s += "randomSpawnAdults:`"+randomSpawnAdults+"`,";
+		s += "randomSpawnMales:`"+randomSpawnMales+"`,";
+		s += "randomSpawnFemales:`"+randomSpawnFemales+"`,";
+		s += "randomSpawnCars:`"+randomSpawnCars+"`,";
+		s += "autoPilot:`"+autoPilot+"`,";
+		s += "playerFaceDirection:`"+playerFaceDirection+"`,";
+		s += "suckPlayerIntoMiddle:`"+suckPlayerIntoMiddle+"`,";
+		s += "eventID:`"+eventID+"`,";
+		s += "comment:`"+comment+"`,";
+		s += "mapID:`"+mapID+"`,";
+		s += "stateID:`"+stateID+"`,";
+		for(int i=0;i<connectionTYPEIDList.size();i++)
+		{
+			s += "connectionTYPEIDList:`"+connectionTYPEIDList.get(i)+"`,";
+		}
+		s += "destinationTYPEID:`"+destinationTYPEID+"`,";
+		s += "arrivalXPixels1X:`"+arrivalXPixels1X+"`,";
+		s += "arrivalYPixels1X:`"+arrivalYPixels1X+"`,";
+		s += "isWarpArea:`"+isWarpArea+"`,";
+		s += "destinationMapName:`"+destinationMapName+"`,";
+		s += "destinationWarpAreaName:`"+destinationWarpAreaName+"`,";
+
+
+
+		return s;
+	}
+
+
+	//===============================================================================================
+	public static AreaData fromString(String text)
+	{//===============================================================================================
+
+		AreaData data = new AreaData();
+
+		String t = new String(text);
+
+		t = t.substring(t.indexOf("name:`")+1);
+		data.name = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("id:`")+1);
+		data.id = Integer.parseInt(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("mapXPixels1X:`")+1);
+		data.mapXPixels1X = Integer.parseInt(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("mapYPixels1X:`")+1);
+		data.mapYPixels1X = Integer.parseInt(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("widthPixels1X:`")+1);
+		data.widthPixels1X = Integer.parseInt(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("heightPixels1X:`")+1);
+		data.heightPixels1X = Integer.parseInt(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("randomPointOfInterestOrExit:`")+1);
+		data.randomPointOfInterestOrExit = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("randomNPCSpawnPoint:`")+1);
+		data.randomNPCSpawnPoint = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("standSpawnDirection:`")+1);
+		data.standSpawnDirection = Integer.parseInt(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("waitHereTicks:`")+1);
+		data.waitHereTicks = Integer.parseInt(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("randomWaitTime:`")+1);
+		data.randomWaitTime = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("onlyOneAllowed:`")+1);
+		data.onlyOneAllowed = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("randomNPCStayHere:`")+1);
+		data.randomNPCStayHere = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("randomSpawnChance:`")+1);
+		data.randomSpawnChance = Float.parseFloat(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("randomSpawnOnlyTryOnce:`")+1);
+		data.randomSpawnOnlyTryOnce = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("randomSpawnOnlyOffscreen:`")+1);
+		data.randomSpawnOnlyOffscreen = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("randomSpawnDelay:`")+1);
+		data.randomSpawnDelay = Integer.parseInt(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("randomSpawnKids:`")+1);
+		data.randomSpawnKids = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("randomSpawnAdults:`")+1);
+		data.randomSpawnAdults = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("randomSpawnMales:`")+1);
+		data.randomSpawnMales = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("randomSpawnFemales:`")+1);
+		data.randomSpawnFemales = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("randomSpawnCars:`")+1);
+		data.randomSpawnCars = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("autoPilot:`")+1);
+		data.autoPilot = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("playerFaceDirection:`")+1);
+		data.playerFaceDirection = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("suckPlayerIntoMiddle:`")+1);
+		data.suckPlayerIntoMiddle = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("eventID:`")+1);
+		data.eventID = Integer.parseInt(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("comment:`")+1);
+		data.comment = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("mapID:`")+1);
+		data.mapID = Integer.parseInt(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("stateID:`")+1);
+		data.stateID = Integer.parseInt(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		while(t.indexOf("connectionTYPEIDList:`")!=-1)
+		{
+			t = t.substring(t.indexOf("connectionTYPEIDList:`")+1);
+			data.connectionTYPEIDList.add(t.substring(0,t.indexOf("`")));
+			t = t.substring(t.indexOf("`,")+1);
+		}
+
+		t = t.substring(t.indexOf("destinationTYPEID:`")+1);
+		data.destinationTYPEID = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("arrivalXPixels1X:`")+1);
+		data.arrivalXPixels1X = Integer.parseInt(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("arrivalYPixels1X:`")+1);
+		data.arrivalYPixels1X = Integer.parseInt(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("isWarpArea:`")+1);
+		data.isWarpArea = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("destinationMapName:`")+1);
+		data.destinationMapName = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("destinationWarpAreaName:`")+1);
+		data.destinationWarpAreaName = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+1);
+
+		return data;
 	}
 
 

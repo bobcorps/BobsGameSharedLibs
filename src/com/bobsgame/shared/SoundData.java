@@ -110,6 +110,68 @@ public class SoundData extends AssetData
 
 	}
 
+
+	//===============================================================================================
+	public String toString()
+	{//===============================================================================================
+
+		String s = "";
+
+		s = super.toString();
+
+
+
+
+		s += "fileName:`"+fileName+"`,";
+		s += "fullFilePath:`"+fullFilePath+"`,";
+		s += "md5Name:`"+md5Name+"`,";
+
+
+
+		return s;
+	}
+
+
+	//===============================================================================================
+	public static SoundData fromString(String text)
+	{//===============================================================================================
+
+		SoundData data = new SoundData();
+
+		String t = new String(text);
+
+
+		t = t.substring(t.indexOf("name:`")+1);
+		data.name = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("id:`")+1);
+		data.id = Integer.parseInt(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("fileName:`")+1);
+		data.fileName = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("fullFilePath:`")+1);
+		data.fullFilePath = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("md5Name:`")+1);
+		data.md5Name = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+1);
+
+
+
+
+
+		return data;
+
+
+	}
+
+
+
 	//===============================================================================================
 	public String getTYPEIDString()
 	{//===============================================================================================

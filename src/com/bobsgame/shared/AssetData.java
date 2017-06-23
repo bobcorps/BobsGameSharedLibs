@@ -31,8 +31,8 @@ public class AssetData
 
 
 
-	private String name;
-	private int id = -1;
+	protected String name;
+	protected int id = -1;
 
 
 
@@ -55,79 +55,105 @@ public class AssetData
 	}
 
 
-	//===============================================================================================
-	public String toJSON()
-	{//===============================================================================================
-
-		Gson gson = new Gson();
-		String json = gson.toJson(this);
-
-//		ObjectMapper mapper = new ObjectMapper();
-//		String json = "";
+//	//===============================================================================================
+//	public String toJSON()
+//	{//===============================================================================================
 //
-//		try
-//		{
-//			json = mapper.writeValueAsString(this);
-//		}
-//		catch(JsonGenerationException e)
-//		{
-//			e.printStackTrace();
-//		}
-//		catch(JsonMappingException e)
-//		{
-//			e.printStackTrace();
-//		}
-//		catch(IOException e)
-//		{
-//			e.printStackTrace();
-//		}
-
-
-		return json;
-
-	}
-
-
+//		Gson gson = new Gson();
+//		String json = gson.toJson(this);
+//
+////		ObjectMapper mapper = new ObjectMapper();
+////		String json = "";
+////
+////		try
+////		{
+////			json = mapper.writeValueAsString(this);
+////		}
+////		catch(JsonGenerationException e)
+////		{
+////			e.printStackTrace();
+////		}
+////		catch(JsonMappingException e)
+////		{
+////			e.printStackTrace();
+////		}
+////		catch(IOException e)
+////		{
+////			e.printStackTrace();
+////		}
+//
+//
+//		return json;
+//
+//	}
 
 
 	//===============================================================================================
-	public String toBase64ZippedJSON()
+	public String toString()
 	{//===============================================================================================
 
+		String s = "";
 
-		String json = toJSON();
-		//System.out.println("json------------------------------");
-		//System.out.println("length:"+json.length());
-		//System.out.println(json);
-
-		String zip = "";
-
-		zip = Utils.zipString(json);
-
-
-		//System.out.println("zip------------------------------");
-		//System.out.println("length:"+zip.length());
-		//System.out.println(zip);
+		while(name.contains("`"))
+		{
+			String front = name.substring(0,name.indexOf("`"));
+			String back = name.substring(name.indexOf("`")+1);
+			name = front + back;
+		}
 
 
-		String b64 = Utils.encodeStringToBase64(zip);
 
-		//System.out.println("b64------------------------------");
-		//System.out.println("length:"+b64.length());
-		//System.out.println(b64);
-
-		//String decode64 = decodeBase64String(b64);
-		//String unzip = unzipString(decode64);
-		//MapData m2 = gson.fromJson(unzip,MapData.class);
-		//json = gson.toJson(m2);
-		//System.out.println("json------------------------------");
-		//System.out.println("length:"+json.length());
-		//System.out.println(json);
-
-		return b64;
+		s += "name:`"+name+"`,";
+		s += "id:`"+id+"`,";
 
 
+		return s;
 	}
+
+
+
+
+
+//
+//
+//	//===============================================================================================
+//	public String toBase64ZippedJSON()
+//	{//===============================================================================================
+//
+//
+//		String json = toJSON();
+//		//System.out.println("json------------------------------");
+//		//System.out.println("length:"+json.length());
+//		//System.out.println(json);
+//
+//		String zip = "";
+//
+//		zip = Utils.zipString(json);
+//
+//
+//		//System.out.println("zip------------------------------");
+//		//System.out.println("length:"+zip.length());
+//		//System.out.println(zip);
+//
+//
+//		String b64 = Utils.encodeStringToBase64(zip);
+//
+//		//System.out.println("b64------------------------------");
+//		//System.out.println("length:"+b64.length());
+//		//System.out.println(b64);
+//
+//		//String decode64 = decodeBase64String(b64);
+//		//String unzip = unzipString(decode64);
+//		//MapData m2 = gson.fromJson(unzip,MapData.class);
+//		//json = gson.toJson(m2);
+//		//System.out.println("json------------------------------");
+//		//System.out.println("length:"+json.length());
+//		//System.out.println(json);
+//
+//		return b64;
+//
+//
+//	}
 
 
 	public String name(){return name;}

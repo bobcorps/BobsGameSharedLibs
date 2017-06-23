@@ -93,6 +93,53 @@ public class GameStringData extends AssetData
 	}
 
 	//===============================================================================================
+	public String toString()
+	{//===============================================================================================
+
+		String s = "";
+
+		s = super.toString();
+
+		while(text.contains("`"))
+		{
+			String front = text.substring(0,text.indexOf("`"));
+			String back = text.substring(text.indexOf("`")+1);
+			text = front + back;
+		}
+
+
+		s += "text:`"+text+"`,";
+
+		return s;
+	}
+
+
+	//===============================================================================================
+	public static GameStringData fromString(String text)
+	{//===============================================================================================
+
+		GameStringData data = new GameStringData();
+
+		String t = new String(text);
+
+
+		t = t.substring(t.indexOf("name:`")+1);
+		data.name = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("id:`")+1);
+		data.id = Integer.parseInt(t.substring(0,t.indexOf("`")));
+		t = t.substring(t.indexOf("`,")+1);
+
+		t = t.substring(t.indexOf("text:`")+1);
+		data.text = t.substring(0,t.indexOf("`"));
+		t = t.substring(t.indexOf("`,")+1);
+
+		return data;
+	}
+
+
+	//===============================================================================================
 	public String getTYPEIDString()
 	{//===============================================================================================
 		return "GAMESTRING."+id();
