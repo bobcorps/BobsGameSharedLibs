@@ -43,14 +43,14 @@ public class AreaData extends AssetData
 	private boolean autoPilot = false;//player will enable autopilot, show autopilot caption, follow connections
 	private boolean playerFaceDirection = false;//for couches, chairs
 	private boolean suckPlayerIntoMiddle = false;//for chairs
-	private int eventID = -1;
+	//private int eventID = -1;
 
 
 	private String comment = "";
 
 
-	private int mapID = -1;
-	private int stateID = -1;
+	//private int mapID = -1;
+	//private int stateID = -1;
 
 
 
@@ -84,6 +84,8 @@ public class AreaData extends AssetData
 	private String destinationMapName = "";
 	private String destinationWarpAreaName = "";
 
+	public EventData eventData = null;
+
 
 	//=========================================================================================================================
 	public AreaData()
@@ -93,7 +95,7 @@ public class AreaData extends AssetData
 
 
 	//=========================================================================================================================
-	public AreaData(int id, String name, int mapXPixels1X, int mapYPixels1X, int widthPixels1X, int heightPixels1X, String destinationTYPEID, int arrivalXPixels1X, int arrivalYPixels1X, boolean randomPointOfInterestOrExit,boolean randomNPCSpawnPoint,int standSpawnDirection,int waitHereTicks,boolean randomWaitTime,boolean onlyOneAllowed,boolean randomNPCStayHere,	float randomSpawnChance,	boolean randomSpawnOnlyTryOnce,	boolean randomSpawnOnlyOffscreen,	int randomSpawnDelay,	boolean randomSpawnKids,	boolean randomSpawnAdults,	boolean randomSpawnMales,	boolean randomSpawnFemales,	boolean randomSpawnCars,boolean autoPilot, boolean playerFaceDirection, boolean suckPlayerIntoMiddle, int eventID, String comment)
+	public AreaData(int id, String name, int mapXPixels1X, int mapYPixels1X, int widthPixels1X, int heightPixels1X, String destinationTYPEID, int arrivalXPixels1X, int arrivalYPixels1X, boolean randomPointOfInterestOrExit,boolean randomNPCSpawnPoint,int standSpawnDirection,int waitHereTicks,boolean randomWaitTime,boolean onlyOneAllowed,boolean randomNPCStayHere,	float randomSpawnChance,	boolean randomSpawnOnlyTryOnce,	boolean randomSpawnOnlyOffscreen,	int randomSpawnDelay,	boolean randomSpawnKids,	boolean randomSpawnAdults,	boolean randomSpawnMales,	boolean randomSpawnFemales,	boolean randomSpawnCars,boolean autoPilot, boolean playerFaceDirection, boolean suckPlayerIntoMiddle, EventData eventData, String comment)
 	{//=========================================================================================================================
 
 
@@ -123,7 +125,7 @@ public class AreaData extends AssetData
 				autoPilot,
 				playerFaceDirection,
 				suckPlayerIntoMiddle,
-				eventID,
+				eventData,
 				comment);
 
 
@@ -162,7 +164,7 @@ public class AreaData extends AssetData
 
 
 	//=========================================================================================================================
-	public AreaData(int id, String name, int mapXPixels1X, int mapYPixels1X, int widthPixels1X, int heightPixels1X, boolean randomPointOfInterestOrExit, boolean randomNPCSpawnPoint,int standSpawnDirection, int waitHereTicks,	boolean randomWaitTime,	boolean onlyOneAllowed,	boolean randomNPCStayHere,	float randomSpawnChance,	boolean randomSpawnOnlyTryOnce,	boolean randomSpawnOnlyOffscreen,	int randomSpawnDelay,	boolean randomSpawnKids,	boolean randomSpawnAdults,	boolean randomSpawnMales,	boolean randomSpawnFemales,	boolean randomSpawnCars,boolean autoPilot, boolean playerFaceDirection, boolean suckPlayerIntoMiddle, int eventID, String comment)
+	public AreaData(int id, String name, int mapXPixels1X, int mapYPixels1X, int widthPixels1X, int heightPixels1X, boolean randomPointOfInterestOrExit, boolean randomNPCSpawnPoint,int standSpawnDirection, int waitHereTicks,	boolean randomWaitTime,	boolean onlyOneAllowed,	boolean randomNPCStayHere,	float randomSpawnChance,	boolean randomSpawnOnlyTryOnce,	boolean randomSpawnOnlyOffscreen,	int randomSpawnDelay,	boolean randomSpawnKids,	boolean randomSpawnAdults,	boolean randomSpawnMales,	boolean randomSpawnFemales,	boolean randomSpawnCars,boolean autoPilot, boolean playerFaceDirection, boolean suckPlayerIntoMiddle, EventData eventData, String comment)
 	{//=========================================================================================================================
 
 
@@ -197,7 +199,7 @@ public class AreaData extends AssetData
 		this.autoPilot = autoPilot;
 		this.playerFaceDirection = playerFaceDirection;
 		this.suckPlayerIntoMiddle = suckPlayerIntoMiddle;
-		this.eventID = eventID;
+		this.eventData = eventData;
 
 
 	}
@@ -348,10 +350,10 @@ public class AreaData extends AssetData
 		s += "autoPilot:`"+autoPilot+"`,";
 		s += "playerFaceDirection:`"+playerFaceDirection+"`,";
 		s += "suckPlayerIntoMiddle:`"+suckPlayerIntoMiddle+"`,";
-		s += "eventID:`"+eventID+"`,";
+		//s += "eventID:`"+eventID+"`,";
 		s += "comment:`"+comment+"`,";
-		s += "mapID:`"+mapID+"`,";
-		s += "stateID:`"+stateID+"`,";
+		//s += "mapID:`"+mapID+"`,";
+		//s += "stateID:`"+stateID+"`,";
 		for(int i=0;i<connectionTYPEIDList.size();i++)
 		{
 			s += "connectionTYPEIDList:`"+connectionTYPEIDList.get(i)+"`,";
@@ -363,7 +365,9 @@ public class AreaData extends AssetData
 		s += "destinationMapName:`"+destinationMapName+"`,";
 		s += "destinationWarpAreaName:`"+destinationWarpAreaName+"`,";
 
-
+		s += "eventData:{";
+		if(eventData!=null)s+=eventData.toString();
+		s +="},";
 
 		return s;
 	}
@@ -491,25 +495,34 @@ public class AreaData extends AssetData
 		suckPlayerIntoMiddle = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
 		t = t.substring(t.indexOf("`,")+2);
 
-		t = t.substring(t.indexOf("eventID:`")+1);
-		t = t.substring(t.indexOf("`")+1);
-		eventID = Integer.parseInt(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+2);
+//		if(t.startsWith("eventID:"))
+//		{
+//		t = t.substring(t.indexOf("eventID:`")+1);
+//		t = t.substring(t.indexOf("`")+1);
+//		eventID = Integer.parseInt(t.substring(0,t.indexOf("`")));
+//		t = t.substring(t.indexOf("`,")+2);
+//		}
 
 		t = t.substring(t.indexOf("comment:`")+1);
 		t = t.substring(t.indexOf("`")+1);
 		comment = t.substring(0,t.indexOf("`"));
 		t = t.substring(t.indexOf("`,")+2);
 
-		t = t.substring(t.indexOf("mapID:`")+1);
-		t = t.substring(t.indexOf("`")+1);
-		mapID = Integer.parseInt(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+2);
-
-		t = t.substring(t.indexOf("stateID:`")+1);
-		t = t.substring(t.indexOf("`")+1);
-		stateID = Integer.parseInt(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+2);
+//		if(t.startsWith("mapID:"))
+//		{
+//			t = t.substring(t.indexOf("mapID:`")+1);
+//			t = t.substring(t.indexOf("`")+1);
+//			mapID = Integer.parseInt(t.substring(0,t.indexOf("`")));
+//			t = t.substring(t.indexOf("`,")+2);
+//		}
+//
+//		if(t.startsWith("stateID:"))
+//		{
+//			t = t.substring(t.indexOf("stateID:`")+1);
+//			t = t.substring(t.indexOf("`")+1);
+//			stateID = Integer.parseInt(t.substring(0,t.indexOf("`")));
+//			t = t.substring(t.indexOf("`,")+2);
+//		}
 
 		while(t.startsWith("connectionTYPEIDList:`"))
 		{
@@ -548,6 +561,22 @@ public class AreaData extends AssetData
 		t = t.substring(t.indexOf("`")+1);
 		destinationWarpAreaName = t.substring(0,t.indexOf("`"));
 		t = t.substring(t.indexOf("`,")+2);
+
+		if(t.startsWith("eventData:"))
+		{
+
+			t = t.substring(t.indexOf("eventData:{")+1);
+			t = t.substring(t.indexOf("{")+1);
+			while(t.startsWith("}")==false)
+			{
+				EventData data = new EventData();
+				t = data.initFromString(t);
+				eventData = data;
+			}
+			t = t.substring(t.indexOf("}")+1);
+			t = t.substring(t.indexOf(",")+1);
+
+		}
 
 		return t;
 	}
@@ -613,15 +642,15 @@ public class AreaData extends AssetData
 	public boolean autoPilot(){return autoPilot;}
 	public boolean playerFaceDirection(){return playerFaceDirection;}
 	public boolean suckPlayerIntoMiddle(){return suckPlayerIntoMiddle;}
-	public int eventID(){return eventID;}
+	public EventData eventData(){return eventData;}
 	//public String stateName(){return data.stateName;}
 	public ArrayList<String> connectionTYPEIDList(){return connectionTYPEIDList;}
 	public String comment(){return comment;}
 	public String destinationTYPEIDString(){return destinationTYPEID;}
 	public String destinationMapName(){return destinationMapName;}
 	public String destinationWarpAreaName(){return destinationWarpAreaName;}
-	public int mapID(){return mapID;}
-	public int stateID(){return stateID;}
+	//public int mapID(){return mapID;}
+	//public int stateID(){return stateID;}
 
 
 
@@ -652,7 +681,7 @@ public class AreaData extends AssetData
 	public void setPlayerFaceDirection(boolean s){playerFaceDirection = s;}
 	public void setSuckPlayerIntoMiddle(boolean s){suckPlayerIntoMiddle = s;}
 	public void setIsWarpArea(boolean s){isWarpArea = s;}
-	public void setEventID(int s){eventID = s;}
+	public void setEventData(EventData s){eventData = s;}
 	public void setComment(String s){comment = s;}
 	public void setMapXPixels1X(int s){mapXPixels1X=s;}
 	public void setMapYPixels1X(int s){mapYPixels1X=s;}
@@ -660,8 +689,8 @@ public class AreaData extends AssetData
 	public void setArrivalYPixels1X(int s){arrivalYPixels1X=s;}
 	public void setWidthPixels1X(int s){widthPixels1X=s;}
 	public void setHeightPixels1X(int s){heightPixels1X=s;}
-	public void setMapID(int s){mapID=s;}
-	public void setStateID(int s){stateID=s;}
+	//public void setMapID(int s){mapID=s;}
+	//public void setStateID(int s){stateID=s;}
 
 
 

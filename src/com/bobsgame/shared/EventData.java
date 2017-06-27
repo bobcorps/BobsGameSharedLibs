@@ -37,6 +37,14 @@ public class EventData extends AssetData
 	private String text = "";
 
 
+	//these are populated on export but discarded on import in the editor.  they are used for the client to preload dialogues, flags, music, etc without doing a server lookup.
+	private ArrayList<DialogueData> dialogueDataList = new ArrayList<DialogueData>();
+	private ArrayList<FlagData> flagDataList = new ArrayList<FlagData>();
+	private ArrayList<SkillData> skillDataList = new ArrayList<SkillData>();
+	private ArrayList<GameStringData> gameStringDataList = new ArrayList<GameStringData>();
+	private ArrayList<MusicData> musicDataList = new ArrayList<MusicData>();
+	private ArrayList<SoundData> soundDataList = new ArrayList<SoundData>();
+
 
 
 	//=========================================================================================================================

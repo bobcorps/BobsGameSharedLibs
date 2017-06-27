@@ -43,7 +43,7 @@ public class DoorData extends EntityData
 
 
 	//=========================================================================================================================
-	public DoorData(int id, String name, String spriteAssetName, int spawnXPixels1X, int spawnYPixels1X, String destinationTYPEID, int arrivalXPixels, int arrivalYPixels, boolean randomNPCSpawnPoint, float randomSpawnChance, boolean randomExitPoint, int randomSpawnDelay, boolean randomSpawnKids, boolean randomSpawnAdults, boolean randomSpawnMales, boolean randomSpawnFemales, int eventID, String comment)
+	public DoorData(int id, String name, String spriteAssetName, int spawnXPixels1X, int spawnYPixels1X, String destinationTYPEID, int arrivalXPixels, int arrivalYPixels, boolean randomNPCSpawnPoint, float randomSpawnChance, boolean randomExitPoint, int randomSpawnDelay, boolean randomSpawnKids, boolean randomSpawnAdults, boolean randomSpawnMales, boolean randomSpawnFemales, EventData eventData, String comment)
 	{//=========================================================================================================================
 
 
@@ -70,7 +70,7 @@ public class DoorData extends EntityData
 				false,            //boolean onlyHereDuringEvent,
 				false,            //boolean randomFrames,
 				true,            //boolean disableShadow,
-				eventID,        //int eventID,
+				eventData,        //int eventID,
 				comment
 		);
 
@@ -124,7 +124,7 @@ public class DoorData extends EntityData
 				false,            //boolean onlyHereDuringEvent,
 				false,            //boolean randomFrames,
 				true,            //boolean disableShadow,
-				-1,        //int eventID,
+				null,        //int eventID,
 				""
 		);
 	}

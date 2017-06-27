@@ -62,7 +62,7 @@ public class SpriteData extends AssetData
 	private boolean forceHQ2X = false;
 	private boolean forceMD5Export = false;
 
-	private int eventID = -1;
+	//private int eventID = -1;
 	private String itemGameDescription = "";
 	private float gamePrice = 0.0f;
 
@@ -83,6 +83,7 @@ public class SpriteData extends AssetData
 
 	private ArrayList<SpriteAnimationSequence> animationList = new ArrayList<SpriteAnimationSequence>();
 
+	public EventData eventData = null;
 
 
 	//=========================================================================================================================
@@ -92,7 +93,7 @@ public class SpriteData extends AssetData
 	}
 
 	//=========================================================================================================================
-	public SpriteData(int id, String name, String displayName, int widthPixels1X, int heightPixels1X, int frames, boolean isNPC, boolean isKid, boolean isAdult, boolean isMale, boolean isFemale, boolean isCar, boolean isAnimal, boolean hasShadow, boolean isRandom, boolean isDoor, boolean isGame, boolean isItem, boolean forceHQ2X, boolean forceClientMD5Export, int eventID, String itemGameDescription, float gamePrice, int utilityOffsetXPixels1X, int utilityOffsetYPixels1X, String dataMD5, String paletteMD5)
+	public SpriteData(int id, String name, String displayName, int widthPixels1X, int heightPixels1X, int frames, boolean isNPC, boolean isKid, boolean isAdult, boolean isMale, boolean isFemale, boolean isCar, boolean isAnimal, boolean hasShadow, boolean isRandom, boolean isDoor, boolean isGame, boolean isItem, boolean forceHQ2X, boolean forceClientMD5Export, EventData eventData, String itemGameDescription, float gamePrice, int utilityOffsetXPixels1X, int utilityOffsetYPixels1X, String dataMD5, String paletteMD5)
 	{//=========================================================================================================================
 
 
@@ -125,7 +126,7 @@ public class SpriteData extends AssetData
 		this.forceHQ2X = forceHQ2X;
 		this.forceMD5Export = forceClientMD5Export;
 
-		this.eventID = eventID;
+		this.eventData = eventData;
 		this.itemGameDescription = itemGameDescription;
 		this.gamePrice = gamePrice;
 
@@ -142,7 +143,7 @@ public class SpriteData extends AssetData
 	public SpriteData(int id, String name, int width, int height, int frames)
 	{//=========================================================================================================================
 
-		this(id,name,"",width,height,frames,false,false,false,false,false,false,false,false,false,false,false,false,false,false,-1,"",0.0f,0,0,"","");
+		this(id,name,"",width,height,frames,false,false,false,false,false,false,false,false,false,false,false,false,false,false,null,"",0.0f,0,0,"","");
 
 	}
 
@@ -241,7 +242,7 @@ public class SpriteData extends AssetData
 		s += "isItem:`"+isItem+"`,";
 		s += "forceHQ2X:`"+forceHQ2X+"`,";
 		s += "forceMD5Export:`"+forceMD5Export+"`,";
-		s += "eventID:`"+eventID+"`,";
+		//s += "eventID:`"+eventID+"`,";
 		s += "itemGameDescription:`"+itemGameDescription+"`,";
 		s += "gamePrice:`"+gamePrice+"`,";
 		s += "utilityOffsetXPixels1X:`"+utilityOffsetXPixels1X+"`,";
@@ -260,6 +261,9 @@ public class SpriteData extends AssetData
 			s += "hitBoxFromBottomPixels1X:`"+animationList.get(i).hitBoxFromBottomPixels1X+"`,";
 		}
 
+		s += "eventData:{";
+		if(eventData!=null)s+=eventData.toString();
+		s +="},";
 
 
 		return s;
@@ -369,10 +373,13 @@ public class SpriteData extends AssetData
 		forceMD5Export = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
 		t = t.substring(t.indexOf("`,")+2);
 
-		t = t.substring(t.indexOf("eventID:`")+1);
-		t = t.substring(t.indexOf("`")+1);
-		eventID = Integer.parseInt(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+2);
+//		if(t.startsWith("eventID:"))
+//		{
+//			t = t.substring(t.indexOf("eventID:`")+1);
+//			t = t.substring(t.indexOf("`")+1);
+//			eventID = Integer.parseInt(t.substring(0,t.indexOf("`")));
+//			t = t.substring(t.indexOf("`,")+2);
+//		}
 
 		t = t.substring(t.indexOf("itemGameDescription:`")+1);
 		t = t.substring(t.indexOf("`")+1);
@@ -449,6 +456,24 @@ public class SpriteData extends AssetData
 			animationList.add(s);
 		}
 
+		if(t.contains("eventData:"))
+		{
+
+
+			t = t.substring(t.indexOf("eventData:{")+1);
+			t = t.substring(t.indexOf("{")+1);
+			while(t.startsWith("}")==false)
+			{
+				EventData data = new EventData();
+				t = data.initFromString(t);
+				eventData = data;
+			}
+			t = t.substring(t.indexOf("}")+1);
+			t = t.substring(t.indexOf(",")+1);
+
+
+		}
+
 		return t;
 
 
@@ -485,7 +510,7 @@ public class SpriteData extends AssetData
 	public boolean isGame(){return isGame;}
 	public boolean isItem(){return isItem;}
 	public boolean forceHQ2X(){return forceHQ2X;}
-	public int eventID(){return eventID;}
+	public EventData eventData(){return eventData;}
 	public String itemGameDescription(){return itemGameDescription;}
 	public float gamePrice(){return gamePrice;}
 	public int utilityOffsetXPixels1X(){return utilityOffsetXPixels1X;}
@@ -521,7 +546,7 @@ public class SpriteData extends AssetData
 	public void setIsItem(boolean s){isItem = s;}
 	public void setForceHQ2X(boolean s){forceHQ2X = s;}
 	public void setForceMD5Export(boolean s){forceMD5Export = s;}
-	public void setEventID(int s){eventID = s;}
+	public void setEventData(EventData s){eventData = s;}
 	public void setItemGameDescription(String s){itemGameDescription = s;}
 	public void setGamePrice(float s){gamePrice = s;}
 	public void setUtilityOffsetXPixels1X(int s){utilityOffsetXPixels1X = s;}

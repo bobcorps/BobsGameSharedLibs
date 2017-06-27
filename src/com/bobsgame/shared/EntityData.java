@@ -77,14 +77,14 @@ public class EntityData extends AssetData
 
 
 
-	private int eventID = -1;
+	//private int eventID = -1;
 	private boolean onlyHereDuringEvent = false;//TODO: what does this do
 
 
 
 
-	private int mapID = -1;
-	private int stateID = -1;
+	//private int mapID = -1;
+	//private int stateID = -1;
 
 
 
@@ -127,6 +127,9 @@ public class EntityData extends AssetData
 
 
 
+	public EventData eventData = null;
+
+
 	//=========================================================================================================================
 	public EntityData()
 	{//=========================================================================================================================
@@ -134,7 +137,7 @@ public class EntityData extends AssetData
 	}
 
 	//=========================================================================================================================
-	public EntityData(int id, String name, String spriteAssetName, float spawnXPixels1X, float spawnYPixels1X, int initialFrame, boolean pushable, boolean nonWalkable, int alphaByte, float scale, int ticksPerPixelMoved, boolean aboveTopLayer, boolean aboveWhenEqual, boolean alwaysOnBottom, boolean animateThroughFrames,boolean randomTimeBetweenAnimation, int ticksBetweenFrames,int ticksBetweenAnimation,boolean onlyHereDuringEvent, boolean randomFrames, boolean disableShadow, int eventID, String comment)
+	public EntityData(int id, String name, String spriteAssetName, float spawnXPixels1X, float spawnYPixels1X, int initialFrame, boolean pushable, boolean nonWalkable, int alphaByte, float scale, int ticksPerPixelMoved, boolean aboveTopLayer, boolean aboveWhenEqual, boolean alwaysOnBottom, boolean animateThroughFrames,boolean randomTimeBetweenAnimation, int ticksBetweenFrames,int ticksBetweenAnimation,boolean onlyHereDuringEvent, boolean randomFrames, boolean disableShadow, EventData eventData, String comment)
 	{//=========================================================================================================================
 
 
@@ -180,7 +183,7 @@ public class EntityData extends AssetData
 
 
 
-		this.eventID = eventID;
+		this.eventData = eventData;
 		this.onlyHereDuringEvent = onlyHereDuringEvent;
 
 		this.comment = comment;
@@ -194,7 +197,7 @@ public class EntityData extends AssetData
 	{//=========================================================================================================================
 
 
-		this(id, name, spriteAssetName,spawnXPixels1X,spawnYPixels1X,0,false,false,255,1.0f,12,false,false,false,false,false,0,0,false,false,false,-1, "");
+		this(id, name, spriteAssetName,spawnXPixels1X,spawnYPixels1X,0,false,false,255,1.0f,12,false,false,false,false,false,0,0,false,false,false,null, "");
 
 
 	}
@@ -225,7 +228,7 @@ public class EntityData extends AssetData
 				false,            //boolean onlyHereDuringEvent,
 				false,            //boolean randomFrames,
 				true,            //boolean disableShadow,
-				-1,        //int eventID,
+				null,        //EventData eventData,
 				""
 		);
 	}
@@ -392,10 +395,10 @@ public class EntityData extends AssetData
 		s += "randomTimeBetweenAnimation:`"+randomTimeBetweenAnimation+"`,";
 		s += "walkSpeed:`"+walkSpeed+"`,";
 		s += "ticksPerPixelMoved:`"+ticksPerPixelMoved+"`,";
-		s += "eventID:`"+eventID+"`,";
+		//s += "eventID:`"+eventID+"`,";
 		s += "onlyHereDuringEvent:`"+onlyHereDuringEvent+"`,";
-		s += "mapID:`"+mapID+"`,";
-		s += "stateID:`"+stateID+"`,";
+		//s += "mapID:`"+mapID+"`,";
+		//s += "stateID:`"+stateID+"`,";
 		s += "animateThroughCurrentAnimation:`"+animateThroughCurrentAnimation+"`,";
 		s += "loopAnimation:`"+loopAnimation+"`,";
 		s += "voicePitch:`"+voicePitch+"`,";
@@ -417,7 +420,9 @@ public class EntityData extends AssetData
 		s += "comment:`"+comment+"`,";
 		s += "isNPC:`"+isNPC+"`,";
 
-
+		s += "eventData:{";
+		if(eventData!=null)s+=eventData.toString();
+		s +="},";
 
 
 		return s;
@@ -547,25 +552,34 @@ public class EntityData extends AssetData
 		ticksPerPixelMoved = Float.parseFloat(t.substring(0,t.indexOf("`")));
 		t = t.substring(t.indexOf("`,")+2);
 
-		t = t.substring(t.indexOf("eventID:`")+1);
-		t = t.substring(t.indexOf("`")+1);
-		eventID = Integer.parseInt(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+2);
+//		if(t.startsWith("eventID:"))
+//		{
+//			t = t.substring(t.indexOf("eventID:`")+1);
+//			t = t.substring(t.indexOf("`")+1);
+//			eventID = Integer.parseInt(t.substring(0,t.indexOf("`")));
+//			t = t.substring(t.indexOf("`,")+2);
+//		}
 
 		t = t.substring(t.indexOf("onlyHereDuringEvent:`")+1);
 		t = t.substring(t.indexOf("`")+1);
 		onlyHereDuringEvent = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
 		t = t.substring(t.indexOf("`,")+2);
 
-		t = t.substring(t.indexOf("mapID:`")+1);
-		t = t.substring(t.indexOf("`")+1);
-		mapID = Integer.parseInt(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+2);
-
-		t = t.substring(t.indexOf("stateID:`")+1);
-		t = t.substring(t.indexOf("`")+1);
-		stateID = Integer.parseInt(t.substring(0,t.indexOf("`")));
-		t = t.substring(t.indexOf("`,")+2);
+//		if(t.startsWith("mapID:"))
+//		{
+//			t = t.substring(t.indexOf("mapID:`")+1);
+//			t = t.substring(t.indexOf("`")+1);
+//			mapID = Integer.parseInt(t.substring(0,t.indexOf("`")));
+//			t = t.substring(t.indexOf("`,")+2);
+//		}
+//
+//		if(t.startsWith("stateID:"))
+//		{
+//			t = t.substring(t.indexOf("stateID:`")+1);
+//			t = t.substring(t.indexOf("`")+1);
+//			stateID = Integer.parseInt(t.substring(0,t.indexOf("`")));
+//			t = t.substring(t.indexOf("`,")+2);
+//		}
 
 		t = t.substring(t.indexOf("animateThroughCurrentAnimation:`")+1);
 		t = t.substring(t.indexOf("`")+1);
@@ -643,6 +657,25 @@ public class EntityData extends AssetData
 		isNPC = Boolean.parseBoolean(t.substring(0,t.indexOf("`")));
 		t = t.substring(t.indexOf("`,")+2);
 
+
+		if(t.startsWith("eventData:"))
+		{
+
+
+			t = t.substring(t.indexOf("eventData:{")+1);
+			t = t.substring(t.indexOf("{")+1);
+			while(t.startsWith("}")==false)
+			{
+				EventData data = new EventData();
+				t = data.initFromString(t);
+				eventData = data;
+			}
+			t = t.substring(t.indexOf("}")+1);
+			t = t.substring(t.indexOf(",")+1);
+
+
+		}
+
 		return t;
 
 
@@ -700,9 +733,9 @@ public class EntityData extends AssetData
 	public boolean dontUsePathfinding(){return dontUsePathfinding;}
 	public boolean pullPlayer(){return pullPlayer;}
 	public boolean pushPlayer(){return pushPlayer;}
-	public int eventID(){return eventID;}
-	public int mapID(){return mapID;}
-	public int stateID(){return stateID;}
+	public EventData eventData(){return eventData;}
+	//public int mapID(){return mapID;}
+	//public int stateID(){return stateID;}
 	public ArrayList<String> connectionTYPEIDList(){return connectionTYPEIDList;}
 	public ArrayList<String> behaviorList(){return behaviorList;}
 
@@ -745,9 +778,9 @@ public class EntityData extends AssetData
 	public void setTicksPerPixelMoved(float s){ticksPerPixelMoved = s;}
 	public void setSpawnXPixels1X(float s){spawnXPixels1X=s;}
 	public void setSpawnYPixels1X(float s){spawnYPixels1X=s;}
-	public void setMapID(int s){mapID = s;}
-	public void setStateID(int s){stateID = s;}
-	public void setEventID(int s){eventID = s;}
+	//public void setMapID(int s){mapID = s;}
+	//public void setStateID(int s){stateID = s;}
+	public void setEventData(EventData s){eventData = s;}
 	public void setComment(String s){comment = s;}
 
 

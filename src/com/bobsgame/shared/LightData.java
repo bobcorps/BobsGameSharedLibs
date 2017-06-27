@@ -68,7 +68,7 @@ public class LightData extends EntityData
 				false,
 				false,
 				true,
-				-1,
+				null,
 				""
 			);
 
@@ -131,7 +131,7 @@ public class LightData extends EntityData
 				false,            //boolean onlyHereDuringEvent,
 				false,            //boolean randomFrames,
 				true,            //boolean disableShadow,
-				-1,        //int eventID,
+				null,        //int eventID,
 				""
 		);
 	}

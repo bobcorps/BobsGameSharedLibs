@@ -224,6 +224,7 @@ public class MapData extends AssetData
 
 	//these are ASSET lists only populated with objectDatas to convert into JSON and fill the regular Map lists at runtime with.
 	private ArrayList<MapStateData> stateDataList = new ArrayList<MapStateData>();
+	//private ArrayList<Integer> eventIDList = new ArrayList<Integer>();
 	private ArrayList<EventData> eventDataList = new ArrayList<EventData>();
 	private ArrayList<DoorData> doorDataList = new ArrayList<DoorData>();
 
@@ -369,13 +370,20 @@ public class MapData extends AssetData
 		s += "},";
 
 
+//		s += "eventIDList:{";
+//		for(int i=0;i<eventIDList.size();i++)
+//		{
+//			s += ""+eventIDList.get(i)+",";
+//		}
+//		s += "},";
+
+		//this exports the event data for convenient loading by the client, so it doesnt have to do server lookups for everything
 		s += "eventDataList:{";
 		for(int i=0;i<eventDataList.size();i++)
 		{
 			s += eventDataList.get(i).toString();
 		}
 		s += "},";
-
 
 		s += "doorDataList:{";
 		for(int i=0;i<doorDataList.size();i++)
@@ -512,16 +520,33 @@ public class MapData extends AssetData
 		t = t.substring(t.indexOf("}")+1);
 		t = t.substring(t.indexOf(",")+1);
 
-		t = t.substring(t.indexOf("eventDataList:{")+1);
-		t = t.substring(t.indexOf("{")+1);
-		while(t.startsWith("}")==false)
+//		if(t.startsWith("eventIDList:"))
+//		{
+//			t = t.substring(t.indexOf("eventIDList:{")+1);
+//			t = t.substring(t.indexOf("{")+1);
+//			while(t.startsWith("}")==false)
+//			{
+//				int id = Integer.parseInt(t.substring(0,t.indexOf(",")));
+//				t = t.substring(t.indexOf(",")+1);
+//				eventIDList.add(id);
+//			}
+//			t = t.substring(t.indexOf("}")+1);
+//			t = t.substring(t.indexOf(",")+1);
+//		}
+
+		if(t.startsWith("eventDataList:"))
 		{
-			EventData data = new EventData();
-			t = data.initFromString(t);
-			eventDataList.add(data);
+			t = t.substring(t.indexOf("eventDataList:{")+1);
+			t = t.substring(t.indexOf("{")+1);
+			while(t.startsWith("}")==false)
+			{
+				EventData data = new EventData();
+				t = data.initFromString(t);
+				eventDataList.add(data);
+			}
+			t = t.substring(t.indexOf("}")+1);
+			t = t.substring(t.indexOf(",")+1);
 		}
-		t = t.substring(t.indexOf("}")+1);
-		t = t.substring(t.indexOf(",")+1);
 
 		t = t.substring(t.indexOf("doorDataList:{")+1);
 		t = t.substring(t.indexOf("{")+1);
@@ -585,6 +610,7 @@ public class MapData extends AssetData
 
 
 	public ArrayList<MapStateData> stateDataList(){return stateDataList;}
+	//public ArrayList<Integer> eventIDList(){return eventIDList;}
 	public ArrayList<EventData> eventDataList(){return eventDataList;}
 	public ArrayList<DoorData> doorDataList(){return doorDataList;}
 
