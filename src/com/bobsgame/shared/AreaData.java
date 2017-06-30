@@ -562,21 +562,19 @@ public class AreaData extends AssetData
 		destinationWarpAreaName = t.substring(0,t.indexOf("`"));
 		t = t.substring(t.indexOf("`,")+2);
 
-		if(t.startsWith("eventData:"))
+
+		t = t.substring(t.indexOf("eventData:{")+1);
+		t = t.substring(t.indexOf("{")+1);
+		while(t.startsWith("}")==false)
 		{
-
-			t = t.substring(t.indexOf("eventData:{")+1);
-			t = t.substring(t.indexOf("{")+1);
-			while(t.startsWith("}")==false)
-			{
-				EventData data = new EventData();
-				t = data.initFromString(t);
-				eventData = data;
-			}
-			t = t.substring(t.indexOf("}")+1);
-			t = t.substring(t.indexOf(",")+1);
-
+			EventData data = new EventData();
+			t = data.initFromString(t);
+			eventData = data;
 		}
+		t = t.substring(t.indexOf("}")+1);
+		t = t.substring(t.indexOf(",")+1);
+
+
 
 		return t;
 	}

@@ -456,23 +456,21 @@ public class SpriteData extends AssetData
 			animationList.add(s);
 		}
 
-		if(t.contains("eventData:"))
+
+
+		t = t.substring(t.indexOf("eventData:{")+1);
+		t = t.substring(t.indexOf("{")+1);
+		while(t.startsWith("}")==false)
 		{
-
-
-			t = t.substring(t.indexOf("eventData:{")+1);
-			t = t.substring(t.indexOf("{")+1);
-			while(t.startsWith("}")==false)
-			{
-				EventData data = new EventData();
-				t = data.initFromString(t);
-				eventData = data;
-			}
-			t = t.substring(t.indexOf("}")+1);
-			t = t.substring(t.indexOf(",")+1);
-
-
+			EventData data = new EventData();
+			t = data.initFromString(t);
+			eventData = data;
 		}
+		t = t.substring(t.indexOf("}")+1);
+		t = t.substring(t.indexOf(",")+1);
+
+
+
 
 		return t;
 

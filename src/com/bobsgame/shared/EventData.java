@@ -37,13 +37,7 @@ public class EventData extends AssetData
 	private String text = "";
 
 
-	//these are populated on export but discarded on import in the editor.  they are used for the client to preload dialogues, flags, music, etc without doing a server lookup.
-	private ArrayList<DialogueData> dialogueDataList = new ArrayList<DialogueData>();
-	private ArrayList<FlagData> flagDataList = new ArrayList<FlagData>();
-	private ArrayList<SkillData> skillDataList = new ArrayList<SkillData>();
-	private ArrayList<GameStringData> gameStringDataList = new ArrayList<GameStringData>();
-	private ArrayList<MusicData> musicDataList = new ArrayList<MusicData>();
-	private ArrayList<SoundData> soundDataList = new ArrayList<SoundData>();
+
 
 
 
@@ -114,6 +108,13 @@ public class EventData extends AssetData
 	}
 
 
+	//these are used for the client to preload dialogues, flags, music, etc without doing a server lookup.  USED FOR EXPORT ONLY.
+	public ArrayList<DialogueData> dialogueDataList = new ArrayList<DialogueData>();
+	public ArrayList<FlagData> flagDataList = new ArrayList<FlagData>();
+	public ArrayList<SkillData> skillDataList = new ArrayList<SkillData>();
+	public ArrayList<GameStringData> gameStringDataList = new ArrayList<GameStringData>();
+	public ArrayList<MusicData> musicDataList = new ArrayList<MusicData>();
+	public ArrayList<SoundData> soundDataList = new ArrayList<SoundData>();
 
 
 	//===============================================================================================
@@ -143,6 +144,53 @@ public class EventData extends AssetData
 		s += "text:`"+text+"`,";
 
 
+		s += "dialogueDataList:{";
+		for(int i=0;i<dialogueDataList.size();i++)
+		{
+			s += dialogueDataList.get(i).toString();
+		}
+		s += "},";
+
+
+		s += "flagDataList:{";
+		for(int i=0;i<flagDataList.size();i++)
+		{
+			s += flagDataList.get(i).toString();
+		}
+		s += "},";
+
+
+		s += "skillDataList:{";
+		for(int i=0;i<skillDataList.size();i++)
+		{
+			s += skillDataList.get(i).toString();
+		}
+		s += "},";
+
+
+		s += "gameStringDataList:{";
+		for(int i=0;i<gameStringDataList.size();i++)
+		{
+			s += gameStringDataList.get(i).toString();
+		}
+		s += "},";
+
+
+		s += "musicDataList:{";
+		for(int i=0;i<musicDataList.size();i++)
+		{
+			s += musicDataList.get(i).toString();
+		}
+		s += "},";
+
+
+		s += "soundDataList:{";
+		for(int i=0;i<soundDataList.size();i++)
+		{
+			s += soundDataList.get(i).toString();
+		}
+		s += "},";
+
 		return s;
 	}
 
@@ -169,6 +217,76 @@ public class EventData extends AssetData
 		text = t.substring(0,t.indexOf("`"));
 		t = t.substring(t.indexOf("`,")+2);
 
+
+		//ONLY FOR USE ON CLIENT, IGNORE THIS
+		if(t.startsWith("dialogueDataList"))
+		{
+			t = t.substring(t.indexOf("dialogueDataList:{")+1);
+			t = t.substring(t.indexOf("{")+1);
+			while(t.startsWith("}")==false)
+			{
+				DialogueData data = new DialogueData();
+				t = data.initFromString(t);
+				dialogueDataList.add(data);
+			}
+			t = t.substring(t.indexOf("}")+1);
+			t = t.substring(t.indexOf(",")+1);
+
+			t = t.substring(t.indexOf("flagDataList:{")+1);
+			t = t.substring(t.indexOf("{")+1);
+			while(t.startsWith("}")==false)
+			{
+				FlagData data = new FlagData();
+				t = data.initFromString(t);
+				flagDataList.add(data);
+			}
+			t = t.substring(t.indexOf("}")+1);
+			t = t.substring(t.indexOf(",")+1);
+
+			t = t.substring(t.indexOf("skillDataList:{")+1);
+			t = t.substring(t.indexOf("{")+1);
+			while(t.startsWith("}")==false)
+			{
+				SkillData data = new SkillData();
+				t = data.initFromString(t);
+				skillDataList.add(data);
+			}
+			t = t.substring(t.indexOf("}")+1);
+			t = t.substring(t.indexOf(",")+1);
+
+			t = t.substring(t.indexOf("gameStringDataList:{")+1);
+			t = t.substring(t.indexOf("{")+1);
+			while(t.startsWith("}")==false)
+			{
+				GameStringData data = new GameStringData();
+				t = data.initFromString(t);
+				gameStringDataList.add(data);
+			}
+			t = t.substring(t.indexOf("}")+1);
+			t = t.substring(t.indexOf(",")+1);
+
+			t = t.substring(t.indexOf("musicDataList:{")+1);
+			t = t.substring(t.indexOf("{")+1);
+			while(t.startsWith("}")==false)
+			{
+				MusicData data = new MusicData();
+				t = data.initFromString(t);
+				musicDataList.add(data);
+			}
+			t = t.substring(t.indexOf("}")+1);
+			t = t.substring(t.indexOf(",")+1);
+
+			t = t.substring(t.indexOf("soundDataList:{")+1);
+			t = t.substring(t.indexOf("{")+1);
+			while(t.startsWith("}")==false)
+			{
+				SoundData data = new SoundData();
+				t = data.initFromString(t);
+				soundDataList.add(data);
+			}
+			t = t.substring(t.indexOf("}")+1);
+			t = t.substring(t.indexOf(",")+1);
+		}
 
 		return t;
 	}

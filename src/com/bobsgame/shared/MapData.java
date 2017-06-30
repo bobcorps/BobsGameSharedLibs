@@ -534,19 +534,18 @@ public class MapData extends AssetData
 //			t = t.substring(t.indexOf(",")+1);
 //		}
 
-		if(t.startsWith("eventDataList:"))
+
+		t = t.substring(t.indexOf("eventDataList:{")+1);
+		t = t.substring(t.indexOf("{")+1);
+		while(t.startsWith("}")==false)
 		{
-			t = t.substring(t.indexOf("eventDataList:{")+1);
-			t = t.substring(t.indexOf("{")+1);
-			while(t.startsWith("}")==false)
-			{
-				EventData data = new EventData();
-				t = data.initFromString(t);
-				eventDataList.add(data);
-			}
-			t = t.substring(t.indexOf("}")+1);
-			t = t.substring(t.indexOf(",")+1);
+			EventData data = new EventData();
+			t = data.initFromString(t);
+			eventDataList.add(data);
 		}
+		t = t.substring(t.indexOf("}")+1);
+		t = t.substring(t.indexOf(",")+1);
+
 
 		t = t.substring(t.indexOf("doorDataList:{")+1);
 		t = t.substring(t.indexOf("{")+1);
