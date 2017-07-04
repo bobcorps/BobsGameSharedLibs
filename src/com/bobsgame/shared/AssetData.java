@@ -55,37 +55,37 @@ public class AssetData
 	}
 
 
-//	//===============================================================================================
-//	public String toJSON()
-//	{//===============================================================================================
+	//===============================================================================================
+	public String toJSON()
+	{//===============================================================================================
+
+		Gson gson = new Gson();
+		String json = gson.toJson(this);
+
+//		ObjectMapper mapper = new ObjectMapper();
+//		String json = "";
 //
-//		Gson gson = new Gson();
-//		String json = gson.toJson(this);
-//
-////		ObjectMapper mapper = new ObjectMapper();
-////		String json = "";
-////
-////		try
-////		{
-////			json = mapper.writeValueAsString(this);
-////		}
-////		catch(JsonGenerationException e)
-////		{
-////			e.printStackTrace();
-////		}
-////		catch(JsonMappingException e)
-////		{
-////			e.printStackTrace();
-////		}
-////		catch(IOException e)
-////		{
-////			e.printStackTrace();
-////		}
-//
-//
-//		return json;
-//
-//	}
+//		try
+//		{
+//			json = mapper.writeValueAsString(this);
+//		}
+//		catch(JsonGenerationException e)
+//		{
+//			e.printStackTrace();
+//		}
+//		catch(JsonMappingException e)
+//		{
+//			e.printStackTrace();
+//		}
+//		catch(IOException e)
+//		{
+//			e.printStackTrace();
+//		}
+
+
+		return json;
+
+	}
 
 
 	//===============================================================================================
